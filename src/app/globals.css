@@ -24,3 +24,35 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.placeholder-absolute{
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  font-size: 12px;
+  padding: 2px 4px;
+  background-color: #fff;
+  z-index: 1;
+}
+select, input, .relative > #dateToShip{
+  border: 1px solid grey;
+}
+#matchEvent, #dateToShip, #dateToShip:focus{
+  border: 1px solid transparent;
+  outline: none;
+}
+.border-focus:focus{
+  outline: none;
+}
+.flex-wrap{
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+.border-end{
+  border-right: 1px solid grey;
+}
+.input-padding-left{
+  padding-left: 50px !important;
+}
+.logo-left{
+  left: 35px;
+}
