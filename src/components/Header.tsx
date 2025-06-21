@@ -9,7 +9,6 @@ import {
   FaChartLine,
   FaTicketAlt,
   FaCog,
-  FaArrowRight,
 } from 'react-icons/fa';
 
 const Header: React.FC = () => {
