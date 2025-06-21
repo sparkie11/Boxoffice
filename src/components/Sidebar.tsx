@@ -1,6 +1,6 @@
 // src/components/Sidebar.tsx
 import React from 'react';
-import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog } from 'react-icons/fa';
+import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaArrowRight, } from 'react-icons/fa';
 
 const Sidebar: React.FC = () => {
   return (
@@ -9,6 +9,9 @@ const Sidebar: React.FC = () => {
         <img src="/logo-small.svg" alt="Logo" className="h-10 w-10" />
       </div>
       <nav className="flex flex-col space-y-6">
+        <a href="#" className="p-2 rounded-md hover:bg-gray-700">
+          <FaArrowRight size={24} />
+        </a>
         <a href="#" className="p-2 rounded-md hover:bg-gray-700">
           <FaHome size={24} />
         </a>

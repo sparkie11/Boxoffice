@@ -62,8 +62,8 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
   };
 
   return (
-    <section className="bg-white p-6 rounded-lg shadow-md">
-      <div className="flex justify-between items-center mb-4">
+    <section className="bg-white mt-3  rounded-lg shadow-md">
+      <div className="flex justify-between items-center text-white mb-4" style={{backgroundColor:'#130562'}}>
         <h2 className="text-lg font-semibold">Chelsea vs Arsenal - Premier League</h2>
         <div className="flex items-center space-x-2">
           <span>Sun, 10 Nov 2024</span>
@@ -75,64 +75,93 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                <input
-                  type="checkbox"
-                  className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                  checked={selectedItems.length === inventory.length && inventory.length > 0}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ticket Type</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Split Type</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Max Displ.</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Section/Block</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Row</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">First Seat</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Face Value</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payout Price</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Seating</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {inventory.map((item) => (
-              <tr key={item.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <input
-                    type="checkbox"
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                    checked={selectedItems.includes(item.id)}
-                    onChange={() => handleCheckboxChange(item.id)}
-                  />
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.ticketType}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.quantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.splitType}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.maxDisplayQuantity}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.category}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.sectionBlock}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.row}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.firstSeat}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">£ {item.faceValue.toFixed(2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">£ {item.payoutPrice.toFixed(2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.seatingArrangement}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
-                  <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900">Delete</button>
-                  <button onClick={() => handleClone(item)} className="text-green-600 hover:text-green-900 ml-2">Clone</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className="overflow-x-auto border border-gray-200 rounded-md">
+  <table className="min-w-[2400px] table-fixed divide-y divide-gray-200">
+    <thead>
+      <tr>
+        {/* ✅ Sticky checkbox header */}
+        <th className="w-12 px-4 py-2 sticky left-0 top-0 bg-gray-50 z-20">
+          <input
+            type="checkbox"
+            className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+            checked={selectedItems.length === inventory.length && inventory.length > 0}
+            onChange={handleSelectAll}
+          />
+        </th>
+
+        {/* ❌ Scrollable headers */}
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Ticket Type</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Quantity</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Split Type</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Max Displ.</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Section/Block</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Row</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">First Seat</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Face Value</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Payout Price</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Seating</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Last Seat</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Date to Ship</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Tickets in Hand</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Match Event</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Fan Area</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Notes</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Benefits</th>
+        <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Restrictions</th>
+
+        {/* ✅ Sticky actions header */}
+        <th className="w-32 px-4 py-2 sticky right-0 top-0 bg-gray-50 z-20 text-xs font-medium text-gray-500 uppercase">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {inventory.map((item) => (
+        <tr key={item.id}>
+          {/* ✅ Sticky checkbox column */}
+          <td className="w-12 px-4 py-2 sticky left-0 bg-white z-10">
+            <input
+              type="checkbox"
+              className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+              checked={selectedItems.includes(item.id)}
+              onChange={() => handleCheckboxChange(item.id)}
+            />
+          </td>
+
+          {/* ❌ Scrollable content */}
+          <td className="px-4 py-2 text-sm text-gray-900">{item.ticketType}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.quantity}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.splitType}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.maxDisplayQuantity}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.category}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.sectionBlock}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.row}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.firstSeat}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">£ {item.faceValue.toFixed(2)}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">£ {item.payoutPrice.toFixed(2)}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.seatingArrangement}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.lastSeat}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.dateToShip}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.ticketsInHand ? 'Yes' : 'No'}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.matchEvent}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.fanArea}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.notes}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.benefits}</td>
+          <td className="px-4 py-2 text-sm text-gray-900">{item.restrictions}</td>
+
+          {/* ✅ Sticky actions column */}
+          <td className="w-32 px-4 py-2 sticky right-0 bg-white z-10 text-sm">
+            <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
+            <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:text-red-900">Delete</button>
+            <button onClick={() => handleClone(item)} className="text-green-600 hover:text-green-900 ml-2">Clone</button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
 
       <div className="flex justify-between items-center mt-4">
         <div className="flex space-x-4">

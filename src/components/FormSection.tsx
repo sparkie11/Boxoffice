@@ -1,4 +1,3 @@
-// src/components/FormSection.tsx
 import React, { useState } from 'react';
 import { addInventoryItem, InventoryItem } from '../lib/mockApi';
 
@@ -81,7 +80,6 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
       benefits: 'None',
       restrictions: 'None',
       });
-    // Remove the extra closing brace here
   };
   
 
