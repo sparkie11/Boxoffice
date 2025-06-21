@@ -165,7 +165,7 @@ const TableSection: React.FC<TableSectionProps> = ({
               ].map((title) => (
                 <th
                   key={title}
-                  className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase border-r border-gray-200"
+                  className="px-4 py-2 text-left text-nowrap text-xs font-medium text-gray-500 uppercase border-r border-gray-200"
                 >
                   {title}
                 </th>
@@ -235,7 +235,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["ticketType"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="E-ticket">E-ticket</option>
                     <option value="Physical">Physical</option>
@@ -253,7 +253,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "quantity", Number(e.target.value))
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-1  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -268,7 +268,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["splitType"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="None">None</option>
                     <option value="Even">Even</option>
@@ -290,7 +290,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         Number(e.target.value)
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-1  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -305,7 +305,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["category"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="Away Fans Section">Away Fans Section</option>
                     <option value="Home Fans Section">Home Fans Section</option>
@@ -326,7 +326,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["sectionBlock"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="Longside Lower Tier">Longside Lower Tier</option>
                     <option value="Shortside Lower Tier">Shortside Lower Tier</option>
@@ -349,7 +349,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["row"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     {(["5", "A", "B", "C", "1", "2", "3"] as const).map((val) => (
                       <option key={val} value={val}>
@@ -370,7 +370,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["firstSeat"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     {(["1", "2", "3", "4", "5"] as const).map((val) => (
                       <option key={val} value={val}>
@@ -392,7 +392,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         Number(e.target.value)
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -408,7 +408,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         Number(e.target.value)
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -423,7 +423,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["seatingArrangement"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="Not Seated Together">Not Seated Together</option>
                     <option value="Seated Together">Seated Together</option>
@@ -440,7 +440,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "lastSeat", e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -452,7 +452,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "dateToShip", e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -463,7 +463,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "ticketsInHand", e.target.value === "true")
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="true">Yes</option>
                     <option value="false">No</option>
@@ -478,7 +478,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "matchEvent", e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -493,7 +493,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["fanArea"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="Home">Home</option>
                     <option value="Away">Away</option>
@@ -509,7 +509,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     onChange={(e) =>
                       handleCellChange(item.id, "notes", e.target.value)
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   />
                 </td>
 
@@ -524,7 +524,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["benefits"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="None">None</option>
                     <option value="Free Parking">Free Parking</option>
@@ -545,7 +545,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.target.value as InventoryItem["restrictions"]
                       )
                     }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   >
                     <option value="None">None</option>
                     <option value="Age Limit">Age Limit</option>
