@@ -100,7 +100,7 @@ export default function Home() {
           </div> */}
 
 
-          <div className="flex space-x-4 absolute bottom-0 left-0 sm:left-20 w-full sm:w-[calc(100%-5rem)] bg-white border-t z-40 border-gray-200 p-4 box-border">
+          <div className="flex flex-wrap justify-center gap-2 sm:space-x-4 absolute bottom-0 left-0 sm:left-20 w-full sm:w-[calc(100%-5rem)] bg-white border-t z-40 border-gray-200 p-4 box-border">
             <button onClick={handleSelectAll} className="flex items-center space-x-2 px-3 py-1 rounded-md border border-gray-300 bg-white text-blue-600 hover:bg-gray-50">
               <input
                 type="checkbox"
@@ -131,12 +131,9 @@ export default function Home() {
               type="button"
               className="inline-flex justify-center gap-1 items-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              <span className='font-bold text-red-700 block md:hidden'>
-
-                X 
-              </span>
+ 
               
-                 <span className="text-gray-700 hidden md:block">Cancel</span>
+                 <span className="text-gray-700 ">Cancel</span>
 
               
             </button>
