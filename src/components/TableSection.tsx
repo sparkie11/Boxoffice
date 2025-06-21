@@ -88,7 +88,7 @@ const TableSection: React.FC<TableSectionProps> = ({
   };
 
   return (
-    <section className="bg-white mt-3  rounded-lg shadow-md">
+    <section className="bg-white mt-3 mb-20  rounded-lg shadow-md">
       <div className="flex justify-between items-center p-2 text-white bg-custom-dark-blue">
         <h2 className="text-lg font-semibold">Chelsea vs Arsenal - Premier League</h2>
         <div className="flex items-center space-x-2">
