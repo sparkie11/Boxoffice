@@ -7,6 +7,7 @@ import Sidebar from '../components/Sidebar';
 import FormSection from '../components/FormSection';
 import TableSection from '../components/TableSection';
 import { InventoryItem } from '../lib/mockApi';
+import { TableSectionProps } from '../components/TableSection';
 
 export default function Home() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -81,9 +82,7 @@ export default function Home() {
             inventory={inventory}
             setInventory={setInventory}
             selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
             clonedItemIds={clonedItemIds}
-            setClonedItemIds={setClonedItemIds}
             handleCheckboxChange={handleCheckboxChange}
             handleSelectAll={handleSelectAll}
             handleDelete={handleDelete}

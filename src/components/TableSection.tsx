@@ -1,7 +1,7 @@
 // src/components/TableSection.tsx
 import React, { useState, useEffect } from 'react';
-import { getInventoryItems, InventoryItem, deleteInventoryItem, updateInventoryItem } from '../lib/mockApi';
-import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaArrowRight } from 'react-icons/fa';
+import { getInventoryItems, InventoryItem, updateInventoryItem } from '../lib/mockApi';
+import Image from 'next/image';
 
 
 
@@ -9,26 +9,20 @@ interface TableSectionProps {
   inventory: InventoryItem[];
   setInventory: React.Dispatch<React.SetStateAction<InventoryItem[]>>;
   selectedItems: string[];
-  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
   clonedItemIds: string[];
-  setClonedItemIds: React.Dispatch<React.SetStateAction<string[]>>;
   handleCheckboxChange: (id: string) => void;
   handleSelectAll: () => void;
-  handleDelete: (id?: string) => Promise<void>;
-  handleClone: (itemToClone: InventoryItem) => void;
-  handleEdit: (itemToEdit: InventoryItem) => void;
+  handleClone: (item: InventoryItem) => void;
+  handleEdit: (item: InventoryItem) => void;
 }
 
 const TableSection: React.FC<TableSectionProps> = ({
   inventory,
   setInventory,
   selectedItems,
-  setSelectedItems,
   clonedItemIds,
-  setClonedItemIds,
   handleCheckboxChange,
   handleSelectAll,
-  handleDelete,
   handleClone,
   handleEdit,
 }) => {
@@ -43,23 +37,24 @@ const TableSection: React.FC<TableSectionProps> = ({
     };
     fetchInventory();
 
+    const currentTableContainerRef = tableContainerRef.current;
     const checkScroll = () => {
-      if (tableContainerRef.current) {
-        setCanScrollLeft(tableContainerRef.current.scrollLeft > 0);
-        setCanScrollRight(tableContainerRef.current.scrollLeft < (tableContainerRef.current.scrollWidth - tableContainerRef.current.clientWidth));
+      if (currentTableContainerRef) {
+        setCanScrollLeft(currentTableContainerRef.scrollLeft > 0);
+        setCanScrollRight(currentTableContainerRef.scrollLeft < (currentTableContainerRef.scrollWidth - currentTableContainerRef.clientWidth));
       }
     };
 
     // Initial check and re-check on scroll
     checkScroll();
-    tableContainerRef.current?.addEventListener('scroll', checkScroll);
+    currentTableContainerRef?.addEventListener('scroll', checkScroll);
     window.addEventListener('resize', checkScroll);
 
     return () => {
-      tableContainerRef.current?.removeEventListener('scroll', checkScroll);
+      currentTableContainerRef?.removeEventListener('scroll', checkScroll);
       window.removeEventListener('resize', checkScroll);
     };
-  }, []);
+  }, [setInventory]);
 
 
 
@@ -75,7 +70,7 @@ const TableSection: React.FC<TableSectionProps> = ({
     }
   };
 
-  const handleCellChange = (id: string, field: keyof InventoryItem, value: any) => {
+  const handleCellChange = (id: string, field: keyof InventoryItem, value: string | number | boolean) => {
     setInventory(prevInventory =>
       prevInventory.map(item =>
         item.id === id ? { ...item, [field]: value } : item
@@ -89,7 +84,7 @@ const TableSection: React.FC<TableSectionProps> = ({
 
   return (
     <section className="bg-white mt-3 mb-20  rounded-lg shadow-md">
-      <div className="flex justify-between items-center p-2 text-white bg-custom-dark-blue">
+      <div className="flex justify-between items-center p-2 text-white " style={{backgroundColor:"#130562"}}>
         <h2 className="text-lg font-semibold">Chelsea vs Arsenal - Premier League</h2>
         <div className="flex items-center space-x-2">
           <span>Sun, 10 Nov 2024</span>
@@ -99,9 +94,7 @@ const TableSection: React.FC<TableSectionProps> = ({
   className="p-1 rounded-full bg-gray-200 hover:bg-gray-300"
   aria-label="Scroll Up"
 >
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7"></path>
-  </svg>
+  <Image src="/file.svg" alt="Scroll Up" width={16} height={16} />
 </button>
         </div>
       </div>
