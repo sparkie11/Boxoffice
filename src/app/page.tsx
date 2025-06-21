@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { deleteInventoryItem, updateInventoryItem } from '../lib/mockApi';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import FormSection from '../components/FormSection';
 import TableSection from '../components/TableSection';
 import { InventoryItem } from '../lib/mockApi';
-import { TableSectionProps } from '../components/TableSection';
 
 export default function Home() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -63,7 +62,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex flex-col sm:flex-row h-screen bg-gray-100">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
@@ -85,7 +84,6 @@ export default function Home() {
             clonedItemIds={clonedItemIds}
             handleCheckboxChange={handleCheckboxChange}
             handleSelectAll={handleSelectAll}
-            handleDelete={handleDelete}
             handleClone={handleClone}
             handleEdit={handleEdit}
           />
@@ -102,7 +100,7 @@ export default function Home() {
           </div> */}
 
 
-          <div className="flex space-x-4 absolute bottom-0 left-20 w-[calc(100%-5rem)] bg-white border-t z-40 border-gray-200 p-4 box-border">
+          <div className="flex space-x-4 absolute bottom-0 left-0 sm:left-20 w-full sm:w-[calc(100%-5rem)] bg-white border-t z-40 border-gray-200 p-4 box-border">
             <button onClick={handleSelectAll} className="flex items-center space-x-2 px-3 py-1 rounded-md border border-gray-300 bg-white text-blue-600 hover:bg-gray-50">
               <input
                 type="checkbox"

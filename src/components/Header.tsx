@@ -1,5 +1,6 @@
 // src/components/Header.tsx
 import React from 'react';
+import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaArrowRight } from 'react-icons/fa';
 
 const Header: React.FC = () => {
   return (
@@ -7,7 +8,17 @@ const Header: React.FC = () => {
       <div className="flex items-center">
         <h1 className="text-xl font-semibold">Add Inventory</h1>
       </div>
-      <div className='flex gap-5'>
+      <div className='flex gap-5 sm:hidden'> {/* This div will be visible only on small screens */}
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaArrowRight size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaHome size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-blue-600 hover:bg-gray-200"><FaPlus size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaList size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaShoppingCart size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaChartLine size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaTicketAlt size={24} /></a>
+        <a href="#" className="p-2 rounded-md text-gray-700 hover:bg-gray-200"><FaCog size={24} /></a>
+      </div>
+      <div className='hidden sm:flex gap-5'> {/* This div will be hidden on small screens */}
 
       <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
         Request Event
