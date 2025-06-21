@@ -37,6 +37,20 @@ const TableSection: React.FC<TableSectionProps> = ({
   const tableContainerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [openFilter, setOpenFilter] = useState<string | null>(null);
+  const [filters, setFilters] = useState<Record<string, Set<string>>>({
+    ticketType: new Set(),
+    splitType: new Set(),
+    category: new Set(),
+    sectionBlock: new Set(),
+    row: new Set(),
+    firstSeat: new Set(),
+    seatingArrangement: new Set(),
+    fanArea: new Set(),
+    benefits: new Set(),
+    restrictions: new Set(),
+    ticketsInHand: new Set(),
+  });
 
   /* ------------------------------------------------------------------ */
   /*                               EFFECTS                              */
@@ -96,6 +110,91 @@ const TableSection: React.FC<TableSectionProps> = ({
     const updatedItem = inventory.find((item) => item.id === id);
     if (updatedItem) updateInventoryItem({ ...updatedItem, [field]: value });
   };
+
+  const handleFilterClick = (title: string) => {
+    setOpenFilter(openFilter === title ? null : title);
+  };
+
+  const columnKeyMap: Record<string, keyof InventoryItem> = {
+    "Ticket Type": "ticketType",
+    "Quantity": "quantity",
+    "Split Type": "splitType",
+    "Max Displ.": "maxDisplayQuantity",
+    "Category": "category",
+    "Section/Block": "sectionBlock",
+    "Row": "row",
+    "First Seat": "firstSeat",
+    "Face Value": "faceValue",
+    "Payout Price": "payoutPrice",
+    "Seating": "seatingArrangement",
+    "Last Seat": "lastSeat",
+    "Date to Ship": "dateToShip",
+    "Tickets in Hand": "ticketsInHand",
+    "Match Event": "matchEvent",
+    "Fan Area": "fanArea",
+    "Notes": "notes",
+    "Benefits": "benefits",
+    "Restrictions": "restrictions",
+  };
+
+  const getUniqueOptions = (columnTitle: string) => {
+    const column = columnKeyMap[columnTitle];
+    if (!column) return [];
+
+    const options = new Set<string>();
+    inventory.forEach((item) => {
+      const value = item[column];
+      if (typeof value === 'boolean') {
+        options.add(String(value));
+      } else if (typeof value === 'string' || typeof value === 'number') {
+        options.add(String(value));
+      }
+    });
+    return Array.from(options).sort();
+  };
+
+  const handleFilterChange = (columnTitle: string, value: string) => {
+    const column = columnKeyMap[columnTitle];
+    if (!column) return;
+
+    setFilters((prevFilters) => {
+      const newFilters = { ...prevFilters };
+      if (!newFilters[column]) {
+        newFilters[column] = new Set();
+      }
+      if (newFilters[column].has(value)) {
+        newFilters[column].delete(value);
+      } else {
+        newFilters[column].add(value);
+      }
+      return newFilters;
+    });
+  };
+
+  const filteredInventory = inventory.filter((item) => {
+    for (const columnTitle in filters) {
+      const column = columnKeyMap[columnTitle];
+      if (!column) continue;
+
+      const filterValues = filters[columnTitle];
+      if (filterValues.size > 0) {
+        const itemValue = item[column as keyof InventoryItem];
+        let itemValueString: string;
+        if (typeof itemValue === 'boolean') {
+          itemValueString = String(itemValue);
+        } else if (typeof itemValue === 'string' || typeof itemValue === 'number') {
+          itemValueString = String(itemValue);
+        } else {
+          itemValueString = '';
+        }
+
+        if (!filterValues.has(itemValueString)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  });
 
   /* ------------------------------------------------------------------ */
   /*                                JSX                                 */
@@ -167,7 +266,46 @@ const TableSection: React.FC<TableSectionProps> = ({
                   key={title}
                   className="px-4 py-2 text-left text-nowrap text-xs font-medium text-gray-500 uppercase border-r border-gray-200"
                 >
-                  {title}
+                  <div className="flex items-center justify-between">
+                    <span>{title}</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent sorting when clicking filter icon
+                        handleFilterClick(title);
+                      }}
+                      className="ml-2 p-1 rounded-full hover:bg-gray-200"
+                    >
+                      <svg
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        className="w-4 h-4 transform transition-transform duration-200"
+                        style={{ transform: openFilter === title ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  {openFilter === title && (
+                    <div className="absolute z-10 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        {getUniqueOptions(title).map((option) => (
+                          <label key={option} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <input
+                              type="checkbox"
+                              className="form-checkbox h-4 w-4 text-blue-600"
+                              checked={filters[columnKeyMap[title]]?.has(option) || false}
+                              onChange={() => handleFilterChange(title, option)}
+                            />
+                            <span className="ml-2">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </th>
               ))}
 
@@ -211,7 +349,7 @@ const TableSection: React.FC<TableSectionProps> = ({
           </thead>
 
           <tbody className="bg-white divide-y divide-gray-200">
-            {inventory.map((item) => (
+            {filteredInventory.map((item) => (
               <tr key={item.id}>
                 {/* ✅ Sticky checkbox column */}
                 <td className="w-12 px-4 py-2 sticky left-0 bg-white z-10 border-r border-gray-200">

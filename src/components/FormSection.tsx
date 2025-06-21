@@ -88,7 +88,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
       <form onSubmit={handleSubmit} id="inventory-form">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {/* Match Event */}
-          <div className="md:col-span-3 lg:grid-cols-4 flex-wrap flex items-center space-x-4 relative mb-4 mt-2">
+          <div className="md:col-span-3 gap-2 lg:grid-cols-4 flex-wrap flex items-center space-x-4 relative mb-4 mt-2">
             <label htmlFor="matchEvent" className="block placeholder-absolute text-sm font-medium text-gray-700">Choose Match Event</label>
             <div className="flex-grow flex items-center border border-gray-300 rounded-md shadow-sm p-2">
               <select
@@ -108,7 +108,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               </button>
             </div>
             <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5 text-gray-500" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <svg className="h-5 w-5 text-[#C1E8FA]" fill="#C1E8FA" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
               <input
                 type="date"
                 id="dateToShip"
@@ -120,15 +120,15 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             </div>
             <div className="">|</div>
             <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5 text-gray-500" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <svg className="h-5 w-5 text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <span>16:30</span>
             </div>
             <div className="">|</div>
-            <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5 text-gray-500" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <div className="flex items-center space-x-2 pr-20">
+              <svg className="h-5 w-5  text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>Stamford Bridge, London, United Kingdom</span>
-              <a href="#" className="text-blue-600 hover:underline font-bold text-sm">View Map</a>
             </div>
+              <a href="#" className="text-blue-600 hover:underline font-bold text-sm">View Map</a>
           </div>        
 
           {/* Group of 5 fields in one row */}

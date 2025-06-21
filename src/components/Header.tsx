@@ -29,7 +29,7 @@ const Header: React.FC = () => {
         {/* Desktop icons */}
         <div className='hidden sm:flex gap-5'> {/* This div will be hidden on small screens */}
 
-<button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+<button className="border-2 border-blue-600 text-blue-600 font-bold px-4 py-2 rounded-md hover:bg-blue-600 hover:text-white">
   Request Event
 </button>
 <button className='flex justify-center items-center p-2 rounded-full bg-blue-400 '>
