@@ -1,4 +1,3 @@
-// src/lib/mockApi.ts
 
 export interface InventoryItem {
     id: string;

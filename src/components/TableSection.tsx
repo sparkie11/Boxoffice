@@ -63,7 +63,7 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
 
   return (
     <section className="bg-white mt-3  rounded-lg shadow-md">
-      <div className="flex justify-between items-center text-white mb-4" style={{backgroundColor:'#130562'}}>
+      <div className="flex justify-between items-center p-2 text-white " style={{backgroundColor:'#130562'}}>
         <h2 className="text-lg font-semibold">Chelsea vs Arsenal - Premier League</h2>
         <div className="flex items-center space-x-2">
           <span>Sun, 10 Nov 2024</span>
