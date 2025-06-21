@@ -86,6 +86,20 @@ const TableSection: React.FC<TableSectionProps> = ({
     };
   }, []);
 
+  // 3️⃣ Close filter dropdown when clicking outside.
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (openFilter && !((event.target as HTMLElement).closest('.filter-dropdown') || (event.target as HTMLElement).closest('.filter-button'))) {
+        setOpenFilter(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openFilter]);
+
   /* ------------------------------------------------------------------ */
   /*                             HANDLERS                               */
   /* ------------------------------------------------------------------ */
@@ -170,7 +184,6 @@ const TableSection: React.FC<TableSectionProps> = ({
       }
       return newFilters;
     });
-    setOpenFilter(null); // Close the filter modal after selection
   };
 
   const filteredInventory = inventory.filter((item) => {
@@ -306,7 +319,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                         e.stopPropagation(); // Prevent sorting when clicking filter icon
                         handleFilterClick(title);
                       }}
-                      className="ml-2 p-1 rounded-full hover:bg-gray-200"
+                      className="ml-2 p-1 rounded-full hover:bg-gray-200 filter-button"
                     >
                       <svg
                         fill="currentColor"
@@ -323,7 +336,7 @@ const TableSection: React.FC<TableSectionProps> = ({
                     </button>
                   </div>
                   {openFilter === title && (
-                    <div className="absolute z-10 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div className="absolute z-10 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none filter-dropdown">
                       <div className="py-1">
                         {getUniqueOptions(title).map((option) => (
                           <label key={option} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
