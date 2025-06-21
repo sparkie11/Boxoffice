@@ -38,6 +38,7 @@ const TableSection: React.FC<TableSectionProps> = ({
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
   const [openFilter, setOpenFilter] = useState<string | null>(null);
+  const [isTableVisible, setIsTableVisible] = useState<boolean>(true);// New state for table visibility
   const [filters, setFilters] = useState<Record<string, Set<string>>>({
     ticketType: new Set(),
     splitType: new Set(),
@@ -206,29 +207,63 @@ const TableSection: React.FC<TableSectionProps> = ({
         className="flex justify-between items-center p-2 text-white"
         style={{ backgroundColor: "#130562" }}
       >
-        <h2 className="text-lg font-semibold">
-          Chelsea vs Arsenal – Premier League
-        </h2>
+        <div className="flex items-center">
+          <div className="w-10 px-4 py-3 sticky left-0  z-10 border-r border-gray-100">
+          <div className="w-3 h-3 rounded-full bg-white mr-2"></div>
+
+          </div>
+          <h2 className="text-lg pl-2 font-semibold">Chelsea vs Arsenal – Premier League</h2>
+          <div className="flex items-center text-sm ml-4">
+            <div className="flex items-center space-x-4 pr-2 pl-8 border-r border-gray-400">
+            <svg className="h-5 w-5 text-white" fill="white" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+
+              <span>Sun, 10 Nov 2024</span>
+            </div>
+            <div className="flex items-center space-x-2 px-2 border-r border-gray-400">
+            <svg className="h-5 w-5 text-white" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+              <span>16:30</span>
+            </div>
+            <div className="flex items-center space-x-2 pl-2">
+            <svg className="h-5 w-5  text-white" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+
+              <span>Stamford Bridge, London, United Kingdom</span>
+            </div>
+          </div>
+        </div>
+
         <div className="flex items-center space-x-2 text-sm">
-          <span>Sun, 10 Nov 2024</span>
-          <span>16:30</span>
-          <span>Stamford Bridge, London, United Kingdom</span>
           <button
+            onClick={() => setIsTableVisible(!isTableVisible)}
             className="p-1 rounded-full bg-gray-200 hover:bg-gray-300"
-            aria-label="Download"
+            aria-label="Toggle Table Visibility"
           >
-            <Image src="/file.svg" alt="file" width={16} height={16} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`h-6 w-6 text-[#130562] transform ${isTableVisible ? 'rotate-180' : ''}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
           </button>
         </div>
       </div>
 
       {/* TABLE */}
-      <div
-        ref={tableContainerRef}
-        className="overflow-x-auto border border-gray-200 rounded-md"
-      >
-        <table className="min-w-[2400px] table-fixed divide-y divide-gray-200">
-          <thead>
+      {isTableVisible && (
+        <div
+          ref={tableContainerRef}
+          className="overflow-x-auto border border-gray-200 rounded-md"
+        >
+          <table className="min-w-[2400px] table-fixed divide-y divide-gray-200">
+            <thead>
             <tr>
               {/* ✅ Sticky checkbox header */}
               <th className="w-12 px-4 py-2 sticky left-0 top-0 bg-gray-50 z-20 border-r border-gray-200">
@@ -709,6 +744,7 @@ const TableSection: React.FC<TableSectionProps> = ({
           </tbody>
         </table>
       </div>
+      )}
     </section>
   );
 };
