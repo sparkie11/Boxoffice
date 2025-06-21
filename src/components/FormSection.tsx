@@ -8,7 +8,7 @@ interface FormSectionProps {
 const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
   const [formData, setFormData] = useState<InventoryItem>({
     id: '',
-    ticketType: '',
+    ticketType:'None',
     quantity: 0,
     splitType: 'None',
     maxDisplayQuantity: 1,
@@ -52,7 +52,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
     e.preventDefault();
 
     const newErrors: {[key: string]: string} = {};
-    if (!formData.ticketType) {
+    if (!formData.ticketType || formData.ticketType === 'None') {
       newErrors.ticketType = 'Ticket Type is required.';
     }
     if (!formData.quantity || formData.quantity <= 0) {
@@ -96,7 +96,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
     // Reset all fields to initial state
     setFormData({
       id: '',
-      ticketType: '',
+      ticketType: 'None',
       quantity: 1,
       splitType: 'None',
       maxDisplayQuantity: 1,
@@ -180,7 +180,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 onChange={handleChange}
                 className="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
-                <option></option>
+                <option>None</option>
 
                 <option>E-ticket</option>
                 <option>Physical</option>
