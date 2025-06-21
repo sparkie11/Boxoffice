@@ -124,9 +124,10 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
       <form onSubmit={handleSubmit} id="inventory-form">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {/* Match Event */}
-          <div className="md:col-span-3 gap-2 lg:grid-cols-4 flex-wrap flex items-center space-x-4 relative mb-4 mt-2">
+          {/* <div className='flex  '> */}
+          <div className="md:col-span-3 flex flex-wrap items-center justify-center sm:justify-start gap-2 relative mb-4 mt-2">
             <label htmlFor="matchEvent" className="block placeholder-absolute text-sm font-medium text-gray-700">Choose Match Event</label>
-            <div className="flex-grow flex items-center border border-gray-300 rounded-md shadow-sm p-2">
+            <div className=" flex items-center border border-gray-300 rounded-md shadow-sm p-2">
               <select
                 id="matchEvent"
                 name="matchEvent"
@@ -160,13 +161,13 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <span>16:30</span>
             </div>
             <div className="">|</div>
-            <div className="flex items-center space-x-2 pr-20">
+            <div className="flex items-center space-x-2">
               <svg className="h-5 w-5  text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>Stamford Bridge, London, United Kingdom</span>
             </div>
-              <a href="#" className="text-blue-600 hover:underline font-bold text-sm">View Map</a>
-          </div>        
-
+          </div> 
+              <a href="#" className="text-blue-600 flex justify-between items-center hover:underline font-bold text-sm">View Map</a>
+           {/* </div> */}
           {/* Group of 5 fields in one row */}
           <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {/* Ticket Type */}
