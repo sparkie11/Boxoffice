@@ -154,31 +154,29 @@ const TableSection: React.FC<TableSectionProps> = ({
   };
 
   const handleFilterChange = (columnTitle: string, value: string) => {
-    const column = columnKeyMap[columnTitle];
-    if (!column) return;
+    const itemKey = columnKeyMap[columnTitle]; // Get the actual item key from the column title
+    if (!itemKey) return;
 
     setFilters((prevFilters) => {
       const newFilters = { ...prevFilters };
-      if (!newFilters[column]) {
-        newFilters[column] = new Set();
+      if (!newFilters[itemKey]) {
+        newFilters[itemKey] = new Set();
       }
-      if (newFilters[column].has(value)) {
-        newFilters[column].delete(value);
+      if (newFilters[itemKey].has(value)) {
+        newFilters[itemKey].delete(value);
       } else {
-        newFilters[column].add(value);
+        newFilters[itemKey].add(value);
       }
       return newFilters;
     });
+    setOpenFilter(null); // Close the filter modal after selection
   };
 
   const filteredInventory = inventory.filter((item) => {
-    for (const columnTitle in filters) {
-      const column = columnKeyMap[columnTitle];
-      if (!column) continue;
-
-      const filterValues = filters[columnTitle];
+    for (const itemKey in filters) { // itemKey will be "ticketType", "splitType", etc.
+      const filterValues = filters[itemKey];
       if (filterValues.size > 0) {
-        const itemValue = item[column as keyof InventoryItem];
+        const itemValue = item[itemKey as keyof InventoryItem];
         let itemValueString: string;
         if (typeof itemValue === 'boolean') {
           itemValueString = String(itemValue);
@@ -195,6 +193,8 @@ const TableSection: React.FC<TableSectionProps> = ({
     }
     return true;
   });
+
+
 
   /* ------------------------------------------------------------------ */
   /*                                JSX                                 */
@@ -295,9 +295,9 @@ const TableSection: React.FC<TableSectionProps> = ({
                         {getUniqueOptions(title).map((option) => (
                           <label key={option} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                             <input
-                              type="checkbox"
-                              className="form-checkbox h-4 w-4 text-blue-600"
-                              checked={filters[columnKeyMap[title]]?.has(option) || false}
+                                type="checkbox"
+                                className="form-checkbox h-4 w-4 text-blue-600"
+                                checked={filters[columnKeyMap[title] as keyof InventoryItem]?.has(option) || false}
                               onChange={() => handleFilterChange(title, option)}
                             />
                             <span className="ml-2">{option}</span>
