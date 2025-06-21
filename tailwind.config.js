@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'custom-dark-blue': '#130562',
+        'custom-light-blue': '#03A3ED',
       },
     },
   },

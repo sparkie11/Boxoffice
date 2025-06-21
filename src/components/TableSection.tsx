@@ -8,10 +8,33 @@ import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog
 interface TableSectionProps {
   inventory: InventoryItem[];
   setInventory: React.Dispatch<React.SetStateAction<InventoryItem[]>>;
+  selectedItems: string[];
+  setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>;
+  clonedItemIds: string[];
+  setClonedItemIds: React.Dispatch<React.SetStateAction<string[]>>;
+  handleCheckboxChange: (id: string) => void;
+  handleSelectAll: () => void;
+  handleDelete: (id?: string) => Promise<void>;
+  handleClone: (itemToClone: InventoryItem) => void;
+  handleEdit: (itemToEdit: InventoryItem) => void;
 }
 
-const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+const TableSection: React.FC<TableSectionProps> = ({
+  inventory,
+  setInventory,
+  selectedItems,
+  setSelectedItems,
+  clonedItemIds,
+  setClonedItemIds,
+  handleCheckboxChange,
+  handleSelectAll,
+  handleDelete,
+  handleClone,
+  handleEdit,
+}) => {
+  const tableContainerRef = React.useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -19,49 +42,37 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
       setInventory(items);
     };
     fetchInventory();
-  }, [setInventory]);
 
-  const handleCheckboxChange = (id: string) => {
-    setSelectedItems(prevSelected =>
-      prevSelected.includes(id) ? prevSelected.filter(item => item !== id) : [...prevSelected, id]
-    );
-  };
-
-  const handleSelectAll = () => {
-    if (selectedItems.length === inventory.length) {
-      setSelectedItems([]);
-    } else {
-      setSelectedItems(inventory.map(item => item.id));
-    }
-  };
-
-  const handleDelete = async (id?: string) => {
-    if (id) {
-      await deleteInventoryItem(id);
-      setInventory(prevInventory => prevInventory.filter(item => item.id !== id));
-    } else if (selectedItems.length > 0) {
-      for (const selectedId of selectedItems) {
-        await deleteInventoryItem(selectedId);
+    const checkScroll = () => {
+      if (tableContainerRef.current) {
+        setCanScrollLeft(tableContainerRef.current.scrollLeft > 0);
+        setCanScrollRight(tableContainerRef.current.scrollLeft < (tableContainerRef.current.scrollWidth - tableContainerRef.current.clientWidth));
       }
-      setInventory(prevInventory => prevInventory.filter(item => !selectedItems.includes(item.id)));
-      setSelectedItems([]);
+    };
+
+    // Initial check and re-check on scroll
+    checkScroll();
+    tableContainerRef.current?.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+
+    return () => {
+      tableContainerRef.current?.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, []);
+
+
+
+  const scrollLeft = () => {
+    if (tableContainerRef.current) {
+      tableContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
     }
   };
 
-  const handleClone = (itemToClone: InventoryItem) => {
-    const clonedItem = { ...itemToClone, id: String(inventory.length + 1) }; // Simple ID generation
-    setInventory(prevInventory => [...prevInventory, clonedItem]);
-  };
-
-  const handleEdit = (itemToEdit: InventoryItem) => {
-    // In a real application, this would open a modal or navigate to an edit page
-    // For now, let's simulate an edit by changing a value directly for demonstration
-    const updatedItem = { ...itemToEdit, quantity: itemToEdit.quantity + 1 };
-    updateInventoryItem(updatedItem).then(() => {
-      setInventory(prevInventory =>
-        prevInventory.map(item => (item.id === updatedItem.id ? updatedItem : item))
-      );
-    });
+  const scrollRight = () => {
+    if (tableContainerRef.current) {
+      tableContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
   };
 
   const handleCellChange = (id: string, field: keyof InventoryItem, value: any) => {
@@ -95,7 +106,7 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-gray-200 rounded-md">
+      <div ref={tableContainerRef} className="overflow-x-auto border border-gray-200 rounded-md">
   <table className="min-w-[2400px] table-fixed divide-y divide-gray-200">
     <thead>
       <tr>
@@ -131,9 +142,14 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
         <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase border-r border-gray-200">Restrictions</th>
 
         {/* ✅ Sticky actions header */}
-        <th className="w-32 flex justify-center items-center px-4 py-2 sticky right-0 top-0 bg-gray-50 z-20 text-xs font-medium text-gray-500 uppercase">
-        <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="24px" width="24px" style={{overflow: "visible", color: "currentcolor"}}><path d="M689 165.1 308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z"></path></svg>
-        <svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="24px" width="24px" style={{overflow: "visible", color: "currentcolor"}}><path d="M715.8 493.5 335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path></svg>
+        <th className="w-32 px-4 py-2 sticky right-0 top-0 bg-gray-10 z-20 text-xs font-medium text-gray-500 uppercase flex items-center justify-center space-x-2 bg-white border-0 border-gray-200">
+          <button onClick={scrollLeft} disabled={!canScrollLeft} className="p-1 rounded-full   hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg fill="#130562" strokeWidth="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="24px" width="24px" style={{ overflow: "visible", color: "currentcolor" }}><path d="M689 165.1 308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z"></path></svg>
+          </button>
+          <div className="h-6 border-l border-gray-300"></div> {/* Cell border */}
+          <button onClick={scrollRight} disabled={!canScrollRight} className="p-1 rounded-full  hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            <svg fill="#130562" strokeWidth="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="24px" width="24px" style={{ overflow: "visible", color: "currentcolor" }}><path d="M715.8 493.5 335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z"></path></svg>
+          </button>
         </th>
       </tr>
     </thead>
@@ -356,12 +372,15 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
           </td>
 
           {/* ✅ Sticky actions column */}
-          <td className="w-32 px-4 py-2 sticky right-0 bg-white z-10 text-sm">
-          <button onClick={() => handleClone(item)} className="text-blue-600 hover:text-blue-900 mr-2">
-          <svg fill="currentColor" strokeWidth="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1em" width="1em" style={{overflow: "visible", color: "currentcolor"}}><path d="M256 0c-25.3 0-47.2 14.7-57.6 36-7-2.6-14.5-4-22.4-4-35.3 0-64 28.7-64 64v165.5l-2.7-2.7c-25-25-65.5-25-90.5 0s-25 65.5 0 90.5l87.7 87.7c48 48 113.1 75 181 75H304c1.5 0 3-.1 4.5-.4 91.7-6.2 165-79.4 171.1-171.1.3-1.5.4-3 .4-4.5V160c0-35.3-28.7-64-64-64-5.5 0-10.9.7-16 2v-2c0-35.3-28.7-64-64-64-7.9 0-15.4 1.4-22.4 4C303.2 14.7 281.3 0 256 0zm-16 96.1V64c0-8.8 7.2-16 16-16s16 7.2 16 16v168c0 13.3 10.7 24 24 24s24-10.7 24-24V95.9c0-8.8 7.2-16 16-16s16 7.2 16 16v136c0 13.3 10.7 24 24 24s24-10.7 24-24V160c0-8.8 7.2-16 16-16s16 7.2 16 16v172.9c-.1.6-.1 1.3-.2 1.9-3.4 69.7-59.3 125.6-129 129-.6 0-1.3.1-1.9.2h-13.4c-55.2 0-108.1-21.9-147.1-60.9l-87.7-87.8c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l43.7 43.7c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V96c0-8.8 7.2-16 16-16s16 7.1 16 15.9V232c0 13.3 10.7 24 24 24s24-10.7 24-24V96.1z"></path></svg>
+          <td className="w-32 px-4 py-5 sticky right-0 bg-white z-20 text-sm flex items-center justify-center space-x-2 border-r border-gray-200">
+            <button onClick={() => handleClone(item)} className={`${clonedItemIds.includes(item.id) ? 'text-green-500' : 'text-blue-600'} hover:text-blue-900`}>
+              <svg fill="currentColor" strokeWidth="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1.2em" width="1.2em" style={{ overflow: "visible", color: "currentcolor" }}><path d="M256 0c-25.3 0-47.2 14.7-57.6 36-7-2.6-14.5-4-22.4-4-35.3 0-64 28.7-64 64v165.5l-2.7-2.7c-25-25-65.5-25-90.5 0s-25 65.5 0 90.5l87.7 87.7c48 48 113.1 75 181 75H304c1.5 0 3-.1 4.5-.4 91.7-6.2 165-79.4 171.1-171.1.3-1.5.4-3 .4-4.5V160c0-35.3-28.7-64-64-64-5.5 0-10.9.7-16 2v-2c0-35.3-28.7-64-64-64-7.9 0-15.4 1.4-22.4 4C303.2 14.7 281.3 0 256 0zm-16 96.1V64c0-8.8 7.2-16 16-16s16 7.2 16 16v168c0 13.3 10.7 24 24 24s24-10.7 24-24V95.9c0-8.8 7.2-16 16-16s16 7.2 16 16v136c0 13.3 10.7 24 24 24s24-10.7 24-24V160c0-8.8 7.2-16 16-16s16 7.2 16 16v172.9c-.1.6-.1 1.3-.2 1.9-3.4 69.7-59.3 125.6-129 129-.6 0-1.3.1-1.9.2h-13.4c-55.2 0-108.1-21.9-147.1-60.9l-87.7-87.8c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l43.7 43.7c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V96c0-8.8 7.2-16 16-16s16 7.1 16 15.9V232c0 13.3 10.7 24 24 24s24-10.7 24-24V96.1z"></path></svg>
+            </button>
+            <div className="h-6 border-l border-gray-300"></div>
+            <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-red-900">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
 
-          </button>
-            <button onClick={() => handleEdit(item)} className="text-red-600 hover:text-red-900"><svg fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1em" width="1em" style={{overflow: "visible", color: "currentcolor"}}><path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 0 0-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></button>
+            </button>
           </td>
         </tr>
       ))}
@@ -371,17 +390,11 @@ const TableSection: React.FC<TableSectionProps> = ({ inventory, setInventory }) 
 
 
       <div className="flex justify-between items-center mt-4">
-        <div className="flex space-x-4">
-          <button onClick={handleSelectAll} className="text-blue-600 hover:text-blue-900">Select all</button>
-          <button onClick={() => setSelectedItems([])} className="text-blue-600 hover:text-blue-900">Deselect all</button>
-          <button onClick={() => selectedItems.forEach(id => handleClone(inventory.find(item => item.id === id)!))} className="text-blue-600 hover:text-blue-900">Clone</button>
-          <button onClick={() => selectedItems.forEach(id => handleEdit(inventory.find(item => item.id === id)!))} className="text-blue-600 hover:text-blue-900">Edit</button>
-          <button onClick={() => handleDelete()} className="text-red-600 hover:text-red-900">Delete</button>
-        </div>
-        <div className="space-x-4">
+
+        {/* <div className="space-x-4">
           <button className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">Cancel</button>
           <button className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">Publish Live</button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
