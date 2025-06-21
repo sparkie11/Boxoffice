@@ -1,7 +1,7 @@
 
 export interface InventoryItem {
     id: string;
-    ticketType: 'E-ticket' | 'Physical' | 'Local Delivery' | 'Flash Seats' | 'Mobile Transfer';
+    ticketType: 'E-ticket' | 'Physical' | 'Local Delivery' | 'Flash Seats' | 'Mobile Transfer' | '' ;
     quantity: number;
     splitType: 'None' | 'Even' | 'Odd' | 'Pair' | 'Single';
     maxDisplayQuantity: number;

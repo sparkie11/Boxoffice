@@ -8,8 +8,8 @@ interface FormSectionProps {
 const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
   const [formData, setFormData] = useState<InventoryItem>({
     id: '',
-    ticketType: 'E-ticket',
-    quantity: 1,
+    ticketType: '',
+    quantity: 0,
     splitType: 'None',
     maxDisplayQuantity: 1,
     category: 'Away Fans Section',
@@ -28,6 +28,9 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
     benefits: 'None',
     restrictions: 'None',
   });
+
+  const [errors, setErrors] = useState<{[key: string]: string}>({});
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -48,6 +51,39 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const newErrors: {[key: string]: string} = {};
+    if (!formData.ticketType) {
+      newErrors.ticketType = 'Ticket Type is required.';
+    }
+    if (!formData.quantity || formData.quantity <= 0) {
+      newErrors.quantity = 'Quantity is required.';
+    }
+    if (!formData.seatingArrangement) {
+      newErrors.seatingArrangement = 'Seating Arrangement is required.';
+    }
+    if (!formData.category) {
+      newErrors.category = 'Category is required.';
+    }
+    if (!formData.sectionBlock) {
+      newErrors.sectionBlock = 'Section Block is required.';
+    }
+    if (!formData.row) {
+      newErrors.row = 'Row is required.';
+    }
+    if (!formData.firstSeat) {
+      newErrors.firstSeat = 'First Seat is required.';
+    }
+    if (!formData.dateToShip) {
+      newErrors.dateToShip = 'Date to Ship is required.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({}); // Clear errors if validation passes
+
     // Format dateToShip to YYYY-MM-DD
     const [day, month, year] = formData.dateToShip.split('/');
     const formattedDateToShip = `${year}-${month}-${day}`;
@@ -60,7 +96,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
     // Reset all fields to initial state
     setFormData({
       id: '',
-      ticketType: 'E-ticket',
+      ticketType: '',
       quantity: 1,
       splitType: 'None',
       maxDisplayQuantity: 1,
@@ -143,12 +179,16 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 onChange={handleChange}
                 className="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
+                <option></option>
+
                 <option>E-ticket</option>
                 <option>Physical</option>
                 <option>Local Delivery</option>
                 <option>Flash Seats</option>
                 <option>Mobile Transfer</option>
               </select>
+              {errors.ticketType && <p className="text-red-500 text-xs mt-1">{errors.ticketType}</p>}
+
             </div>
 
             {/* Quantity */}
@@ -162,6 +202,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
+              {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
+
             </div>
 
             {/* Split Type */}
@@ -197,6 +239,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 <option>Aisle Seats</option>
                 <option>Center Seats</option>
               </select>
+              {errors.seatingArrangement && <p className="text-red-500 text-xs mt-1">{errors.seatingArrangement}</p>}
+              
             </div>
 
             {/* Max Display Quantity */}
@@ -247,6 +291,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <option>Upper Tier</option>
               <option>Club Level</option>
             </select>
+            {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
+
           </div>
 
           {/* Section Block */}
@@ -267,6 +313,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <option>Block 2</option>
               <option>Block 3</option>
             </select>
+            {errors.sectionBlock && <p className="text-red-500 text-xs mt-1">{errors.sectionBlock}</p>}
+
           </div>
 
             
@@ -291,6 +339,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <option>2</option>
               <option>3</option>
             </select>
+            {errors.row && <p className="text-red-500 text-xs mt-1">{errors.row}</p>}
+
           </div>
 
           {/* First Seat */}
@@ -309,6 +359,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <option>4</option>
               <option>5</option>
             </select>
+            {errors.firstSeat && <p className="text-red-500 text-xs mt-1">{errors.firstSeat}</p>}
+
           </div>
 
          
