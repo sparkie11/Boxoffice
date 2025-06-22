@@ -66,15 +66,15 @@ export default function Home() {
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 ">
           <FormSection onAddListing={handleAddListing} />
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end  py-4 bg-white">
             <button
               type="submit"
               form="inventory-form"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="ml-3 inline-flex justify-center font-bold  py-2 px-4 border border-transparent shadow-sm text-sm  rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-              Add Listing
+             +  Add Listing
             </button>
           </div>
           <TableSection

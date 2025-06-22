@@ -141,14 +141,6 @@ const TableSection: React.FC<TableSectionProps> = ({
     "Face Value": "faceValue",
     "Payout Price": "payoutPrice",
     "Seating": "seatingArrangement",
-    "Last Seat": "lastSeat",
-    "Date to Ship": "dateToShip",
-    "Tickets in Hand": "ticketsInHand",
-    "Match Event": "matchEvent",
-    "Fan Area": "fanArea",
-    "Notes": "notes",
-    "Benefits": "benefits",
-    "Restrictions": "restrictions",
   };
 
   const getUniqueOptions = (columnTitle: string) => {
@@ -213,7 +205,7 @@ const TableSection: React.FC<TableSectionProps> = ({
   /*                                JSX                                 */
   /* ------------------------------------------------------------------ */
   return (
-    <section className="bg-white mt-3 mb-20 rounded-lg shadow-md">
+    <section className="bg-white mt-6 mb-20 rounded-lg shadow-md">
       {/* HEADER */}
       <div
         className="flex justify-between items-center p-2 text-white"
@@ -298,14 +290,6 @@ const TableSection: React.FC<TableSectionProps> = ({
                 "Face Value",
                 "Payout Price",
                 "Seating",
-                "Last Seat",
-                "Date to Ship",
-                "Tickets in Hand",
-                "Match Event",
-                "Fan Area",
-                "Notes",
-                "Benefits",
-                "Restrictions",
               ].map((title) => (
                 <th
                   key={title}
@@ -615,140 +599,22 @@ const TableSection: React.FC<TableSectionProps> = ({
                   </select>
                 </td>
 
-                {/* Last Seat */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <input
-                    type="text"
-                    value={item.lastSeat || ""}
-                    onChange={(e) =>
-                      handleCellChange(item.id, "lastSeat", e.target.value)
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                </td>
 
-                {/* Date to ship */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <input
-                    type="date"
-                    value={item.dateToShip}
-                    onChange={(e) =>
-                      handleCellChange(item.id, "dateToShip", e.target.value)
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                </td>
-
-                {/* Tickets in hand */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <select
-                    value={String(item.ticketsInHand)}
-                    onChange={(e) =>
-                      handleCellChange(item.id, "ticketsInHand", e.target.value === "true")
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  >
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                  </select>
-                </td>
-
-                {/* Match event */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <input
-                    type="text"
-                    value={item.matchEvent}
-                    onChange={(e) =>
-                      handleCellChange(item.id, "matchEvent", e.target.value)
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                </td>
-
-                {/* Fan area */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <select
-                    value={item.fanArea}
-                    onChange={(e) =>
-                      handleCellChange(
-                        item.id,
-                        "fanArea",
-                        e.target.value as InventoryItem["fanArea"]
-                      )
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  >
-                    <option value="Home">Home</option>
-                    <option value="Away">Away</option>
-                    <option value="Neutral">Neutral</option>
-                  </select>
-                </td>
-
-                {/* Notes */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <input
-                    type="text"
-                    value={item.notes}
-                    onChange={(e) =>
-                      handleCellChange(item.id, "notes", e.target.value)
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  />
-                </td>
-
-                {/* Benefits */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <select
-                    value={item.benefits}
-                    onChange={(e) =>
-                      handleCellChange(
-                        item.id,
-                        "benefits",
-                        e.target.value as InventoryItem["benefits"]
-                      )
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  >
-                    <option value="None">None</option>
-                    <option value="Free Parking">Free Parking</option>
-                    <option value="VIP Access">VIP Access</option>
-                    <option value="Food and Beverage Included">Food and Beverage Included</option>
-                    <option value="Merchandise Discount">Merchandise Discount</option>
-                  </select>
-                </td>
-
-                {/* Restrictions */}
-                <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                  <select
-                    value={item.restrictions}
-                    onChange={(e) =>
-                      handleCellChange(
-                        item.id,
-                        "restrictions",
-                        e.target.value as InventoryItem["restrictions"]
-                      )
-                    }
-                    className="mt-1 block w-full border border-gray-300 rounded-md py-2  focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                  >
-                    <option value="None">None</option>
-                    <option value="Age Limit">Age Limit</option>
-                    <option value="Bag Policy">Bag Policy</option>
-                    <option value="No Re-entry">No Re-entry</option>
-                    <option value="Camera Restrictions">Camera Restrictions</option>
-                  </select>
-                </td>
 
                 {/* ✅ Sticky actions column */}
-                <td className="w-32 px-4 py-5 sticky right-0 bg-white z-20 text-sm flex items-center justify-center space-x-2 border-r border-gray-200">
-            <button onClick={() => handleClone(item)} className={`${clonedItemIds.includes(item.id) ? 'text-green-500' : 'text-blue-600'} hover:text-blue-900`}>
-              <svg fill="currentColor" strokeWidth="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="1.2em" width="1.2em" style={{ overflow: "visible", color: "currentcolor" }}><path d="M256 0c-25.3 0-47.2 14.7-57.6 36-7-2.6-14.5-4-22.4-4-35.3 0-64 28.7-64 64v165.5l-2.7-2.7c-25-25-65.5-25-90.5 0s-25 65.5 0 90.5l87.7 87.7c48 48 113.1 75 181 75H304c1.5 0 3-.1 4.5-.4 91.7-6.2 165-79.4 171.1-171.1.3-1.5.4-3 .4-4.5V160c0-35.3-28.7-64-64-64-5.5 0-10.9.7-16 2v-2c0-35.3-28.7-64-64-64-7.9 0-15.4 1.4-22.4 4C303.2 14.7 281.3 0 256 0zm-16 96.1V64c0-8.8 7.2-16 16-16s16 7.2 16 16v168c0 13.3 10.7 24 24 24s24-10.7 24-24V95.9c0-8.8 7.2-16 16-16s16 7.2 16 16v136c0 13.3 10.7 24 24 24s24-10.7 24-24V160c0-8.8 7.2-16 16-16s16 7.2 16 16v172.9c-.1.6-.1 1.3-.2 1.9-3.4 69.7-59.3 125.6-129 129-.6 0-1.3.1-1.9.2h-13.4c-55.2 0-108.1-21.9-147.1-60.9l-87.7-87.8c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l43.7 43.7c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V96c0-8.8 7.2-16 16-16s16 7.1 16 15.9V232c0 13.3 10.7 24 24 24s24-10.7 24-24V96.1z"></path></svg>
-            </button>
-            <div className="h-6 border-l border-gray-300"></div>
-            <button onClick={() => handleEdit(item)} className="text-blue-600 hover:text-red-900">
-              <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
-
-            </button>
-          </td>
+                <td className="w-32 px-4 py-5 sticky right-0 bg-white z-20 text-sm flex items-center justify-center space-x-2">
+                  <button onClick={() => handleClone(item)} className={`${clonedItemIds.includes(item.id) ? 'text-green-500' : 'text-gray-400'} hover:text-gray-600`}>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 3H14.82C14.4 1.84 13.3 1 12 1C10.7 1 9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM12 3C12.55 3 13 3.45 13 4C13 4.55 12.55 5 12 5C11.45 5 11 4.55 11 4C11 3.45 11.45 3 12 3ZM14 17H7V15H14V17ZM17 13H7V11H17V13ZM17 9H7V7H17V9Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div className="h-6 border-l border-gray-300" />
+                  <button onClick={() => handleEdit(item)} className="text-gray-400 hover:text-gray-600">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63L18.37 3.29C17.98 2.9 17.35 2.9 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

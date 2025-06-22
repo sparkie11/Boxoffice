@@ -164,7 +164,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
   
 
   return (
-    <section className="bg-white p-6 rounded-lg shadow-md mb-6">
+    <section className="bg-white p-6  shadow-md border-b-2 border-gray-200 ">
       <form onSubmit={handleSubmit} id="inventory-form">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {/* Match Event */}
@@ -214,6 +214,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <a href="#" className="text-blue-600 flex justify-between items-center hover:underline font-bold text-sm">View Map</a>
            {/* </div> */}
           {/* Group of 5 fields in one row */}
+          <hr className=''/>
           <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {/* Ticket Type */}
             <div className='relative mb-4'>
@@ -539,11 +540,12 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             </div>
             <button
               type="button"
+              // disabled
               className="inline-flex items-center pr-3 border border-gray-600 mb-4 p-0 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             ><div className="border-end pl-3 py-2 pr-3">
               <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
             </div>
-              <span className='pl-3'>Upload Tickets</span>
+              <span className='pl-3 '>Upload Tickets</span>
             </button>
           
 
