@@ -5,7 +5,7 @@ import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog
 
 const Sidebar: React.FC = () => {
   return (
-    <aside className="hidden sm:flex w-20 text-white flex-col items-center py-4" style={{backgroundColor:"#130562"}}>
+    <aside className="hidden sm:flex w-20 text-white flex-col items-center py-4 bg-custom-dark-blue">
       <div className="mb-8">
         <Image src="/logo-small.svg" height={100} width={100} alt="Logo" className="h-10 w-10" />
       </div>

@@ -20,6 +20,8 @@ export interface InventoryItem {
     notes: string;
     benefits: 'None' | 'Free Parking' | 'VIP Access' | 'Food and Beverage Included' | 'Merchandise Discount';
     restrictions: 'None' | 'Age Limit' | 'Bag Policy' | 'No Re-entry' | 'Camera Restrictions';
+    matchTime: string;
+    matchLocation: string;
   }
   
   const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -46,6 +48,8 @@ export interface InventoryItem {
       notes: 'These are premium tickets with excellent views.',
       benefits: 'None',
       restrictions: 'None',
+      matchTime: '16:30',
+      matchLocation: 'Stamford Bridge, London, United Kingdom',
     },
     {
       id: '2',
@@ -68,6 +72,8 @@ export interface InventoryItem {
       notes: 'Physical tickets will be shipped via courier.',
       benefits: 'Free Parking',
       restrictions: 'Age Limit',
+      matchTime: '15:00',
+      matchLocation: 'Old Trafford, Manchester, United Kingdom',
     },
     {
       id: '3',
@@ -90,7 +96,9 @@ export interface InventoryItem {
       notes: 'Mobile transfer tickets, will be sent 24 hours before the match.',
       benefits: 'VIP Access',
       restrictions: 'No Re-entry',
-    },
+      matchTime: '21:00',
+      matchLocation: 'Santiago Bernabéu, Madrid, Spain',
+    }
   ];
   
   export const getInventoryItems = async (): Promise<InventoryItem[]> => {

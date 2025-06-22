@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
-import { addInventoryItem, InventoryItem } from '../lib/mockApi';
+import React, { useState, useEffect } from 'react';
+import { addInventoryItem, InventoryItem, getInventoryItems } from '../lib/mockApi';
 
 interface FormSectionProps {
   onAddListing: (newItem: InventoryItem) => void;
 }
 
 const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
+  const [inventoryData, setInventoryData] = useState<InventoryItem[]>([]);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      const data = await getInventoryItems();
+      setInventoryData(data);
+      if (data.length > 0) {
+        setFormData(prevData => ({
+          ...prevData,
+          matchEvent: data[0].matchEvent,
+          matchTime: data[0].matchTime,
+          matchLocation: data[0].matchLocation,
+          dateToShip: data[0].dateToShip,
+        }));
+      }
+    };
+    fetchInventory();
+  }, []);
+
   const [formData, setFormData] = useState<InventoryItem>({
     id: '',
     ticketType:'None',
@@ -27,6 +46,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
     notes: '', // Initialize notes
     benefits: 'None',
     restrictions: 'None',
+    matchTime: '16:30',
+    matchLocation: 'Stamford Bridge, London, United Kingdom',
   });
 
   const [errors, setErrors] = useState<{[key: string]: string}>({});
@@ -34,10 +55,31 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: type === 'number' ? parseFloat(value) : value,
-    }));
+
+    setFormData(prevData => {
+      let updatedValue: string | number | boolean = value;
+
+      if (type === 'number') {
+        updatedValue = parseFloat(value);
+      } else if (name === 'matchEvent') {
+        // Find the selected match event from mockApi and update matchTime and matchLocation
+        const selectedMatch = inventoryData.find(item => item.matchEvent === value);
+        if (selectedMatch) {
+          return {
+            ...prevData,
+            [name]: updatedValue,
+            matchTime: selectedMatch.matchTime,
+            matchLocation: selectedMatch.matchLocation,
+            dateToShip: selectedMatch.dateToShip, // Also update dateToShip from selected match
+          };
+        }
+      }
+
+      return {
+        ...prevData,
+        [name]: updatedValue,
+      };
+    });
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -115,6 +157,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
       notes: '',
       benefits: 'None',
       restrictions: 'None',
+      matchTime: '16:30',
+      matchLocation: 'Stamford Bridge, London, United Kingdom',
       });
   };
   
@@ -131,14 +175,15 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <select
                 id="matchEvent"
                 name="matchEvent"
-                value={formData.matchEvent} // Bind value to state
-                onChange={handleChange} // Add onChange handler
+                value={formData.matchEvent}
+                onChange={handleChange}
                 className="mt-1 block w-full border-focus border-none focus:ring-0 focus:border-none sm:text-sm"
               >
-                <option>Chelsea vs Arsenal - Premier League</option>
-                <option>Manchester United vs Liverpool - Premier League</option>
-                <option>Barcelona vs Real Madrid - La Liga</option>
-                <option>Bayern Munich vs Borussia Dortmund - Bundesliga</option>
+                {inventoryData.map((item) => (
+                  <option key={item.id} value={item.matchEvent}>
+                    {item.matchEvent}
+                  </option>
+                ))}
               </select>
               <button type="button" className="ml-2 text-gray-400 hover:text-gray-600">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -150,20 +195,20 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 type="date"
                 id="dateToShip"
                 name="dateToShip"
-                value={formData.dateToShip} // Bind value to state
-                onChange={handleChange} // Add onChange handler
+                value={formData.dateToShip}
+                onChange={handleChange}
                 className="text-sm border-0 border-focus focus:ring-0 focus:border-none"
               />
             </div>
             <div className="">|</div>
             <div className="flex items-center space-x-2">
               <svg className="h-5 w-5 text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>16:30</span>
+              <span>{formData.matchTime}</span>
             </div>
             <div className="">|</div>
             <div className="flex items-center space-x-2">
               <svg className="h-5 w-5  text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span>Stamford Bridge, London, United Kingdom</span>
+              <span>{formData.matchLocation}</span>
             </div>
           </div> 
               <a href="#" className="text-blue-600 flex justify-between items-center hover:underline font-bold text-sm">View Map</a>
