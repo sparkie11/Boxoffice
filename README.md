@@ -2,6 +2,25 @@
 
 This project is a simple inventory management system for BoxOffice, built with Next.js and Tailwind CSS. It allows users to manage ticket inventory, including adding, editing, cloning, and deleting listings.
 
+
+
+## Initial Approach and Architectural Considerations
+Before diving into the implementation, the following foundational approaches guided the development of this application:
+
+- **Global Styling and Constants**:We decided to centralize global colors and size limitations (like font sizes and spacing) within the tailwind.config.js file. This ensures consistency and simplifies future style modifications across the entire application. Similarly, shared constants are defined globally for easy access and management.
+  
+- **Mobile Responsiveness for Sidebar**:For an optimal mobile experience, the sidebar was designed to be hidden on smaller screens, prioritizing content display.
+
+- **Form Design and Data Structure**:A dedicated form component was planned for creating new entries. To facilitate data consistency and reusability, form fields were envisioned to be based on a mock JSON structure. This structure could then be easily imported and used for populating tables or other data displays, ensuring a single source of truth for data definitions.
+
+- **Centralized State Management**:The page.tsx file was designated as the primary home page responsible for importing all necessary components. This central location would also house the declaration of functional and state methods, allowing for efficient state management and prop drilling to child components as needed.
+
+- **Table Filtering Capabilities**: A crucial feature identified was the ability to filter data within the inventory table. This would allow users to dynamically narrow down the displayed values based on specific criteria.
+
+- **Header Responsiveness**: Ensuring the header adapted seamlessly to various screen sizes was a key consideration for a consistent user interface across devices.
+
+- **Dynamic UI Updates**: The application was designed to feature dynamic changes based on the values present in the inventory table, ensuring the UI reflects the most current data.
+
 ## Features
 
 - **Inventory Table**: Displays a list of ticket inventory items with various details.
