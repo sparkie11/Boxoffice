@@ -76,7 +76,9 @@ export default function Home() {
             >
              +  Add Listing
             </button>
-          </div>
+          </div >
+          <div className='p-6'>
+
           <TableSection
             inventory={inventory}
             setInventory={setInventory}
@@ -87,6 +89,8 @@ export default function Home() {
             handleClone={handleClone}
             handleEdit={handleEdit}
           />
+          </div>
+
 
           {/* Add Listing Button */}
           {/* <div className="flex justify-end mt-4">

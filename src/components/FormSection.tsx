@@ -164,12 +164,12 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
   
 
   return (
-    <section className="bg-white p-6  shadow-md border-b-2 border-gray-200 ">
+    <section className="bg-white   shadow-md border-b-2 border-gray-200  ">
       <form onSubmit={handleSubmit} id="inventory-form">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 p-6 md:grid-cols-3   gap-3 ">
           {/* Match Event */}
           {/* <div className='flex  '> */}
-          <div className="md:col-span-3 flex flex-wrap items-center justify-center sm:justify-start gap-2 relative mb-4 mt-2">
+          <div className="md:col-span-3  flex flex-wrap items-center sm:justify-start gap-2 relative  mt-2 md:flex md:justify-start md:items-center  ">
             <label htmlFor="matchEvent" className="block placeholder-absolute text-sm font-medium text-gray-700">Choose Match Event</label>
             <div className=" flex items-center border border-gray-300 rounded-md shadow-sm p-2">
               <select
@@ -210,12 +210,18 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               <svg className="h-5 w-5  text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>{formData.matchLocation}</span>
             </div>
-          </div> 
+            <div className="ml-auto">
               <a href="#" className="text-blue-600 flex justify-between items-center hover:underline font-bold text-sm">View Map</a>
+            </div>
+          </div> 
            {/* </div> */}
+           
+
+           </div>
+           <div className='mb-4 border-t-2 border-gray-200  p-6'>
           {/* Group of 5 fields in one row */}
-          <hr className=''/>
-          <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          {/* <hr className=''/> */}
+          <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4  pb-6">
             {/* Ticket Type */}
             <div className='relative mb-4'>
               <label htmlFor="ticketType" className="placeholder-absolute block text-sm font-medium text-gray-700">Ticket Type<span className="text-red-500">*</span></label>
@@ -247,7 +253,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="quantity"
                 value={formData.quantity}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:focus:border-blue-500 sm:text-sm"
               />
               {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
 
@@ -427,7 +433,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="faceValue"
                 value={formData.faceValue}
                 onChange={handleChange}
-                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
                 placeholder="0.00"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -495,10 +501,9 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 <option>Camera Restrictions</option>
               </select>
             </div>
-          {/* </div> */}
 
-          {/* Date to Ship */}
-          <div className='relative mb-4'>
+            {/* Last Seat */}
+            <div className='relative mb-4'>
             <label htmlFor="dateToShip" className="placeholder-absolute block text-sm font-medium text-gray-700">Date to Ship<span className="text-red-500">*</span></label>
             <div className="mt-1 relative rounded-md shadow-sm">
               <input
@@ -512,8 +517,9 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             </div>
           </div>
 
-          {/* Tickets in Hand and Upload Tickets */}
-          
+            
+
+            {/* Tickets in Hand Checkbox */}
             <div className="flex items-center mb-4">
               <div className="rounded-md border flex items-center justify-between w-full">
                 <div className="border-end pl-3 py-2 pr-3"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M512-40q-82 0-154-37.5T240-182L48-464l19-19q20-21 49.5-24t53.5 14l110 76v-383q0-17 11.5-28.5T320-840q17 0 28.5 11.5T360-800v537L212-366l95 138q35 51 89 79.5T512-120q103 0 175.5-72.5T760-368v-392q0-17 11.5-28.5T800-800q17 0 28.5 11.5T840-760v392q0 137-95.5 232.5T512-40Zm-72-440v-400q0-17 11.5-28.5T480-920q17 0 28.5 11.5T520-880v400h-80Zm160 0v-360q0-17 11.5-28.5T640-880q17 0 28.5 11.5T680-840v360h-80ZM486-300Z"/></svg></div>
@@ -547,54 +553,11 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             </div>
               <span className='pl-3 '>Upload Tickets</span>
             </button>
-          
-
- {/* Last Seat */}
- {/* <div className='relative mb-4'>
-            <label htmlFor="lastSeat" className="placeholder-absolute block text-sm font-medium text-gray-700">Last Seat</label>
-            <select
-              id="lastSeat"
-              name="lastSeat"
-              value={formData.lastSeat || ''}
-              onChange={handleChange}
-              className="mt-1 block w-full pl-3 pr-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
-            >
-              <option></option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-            </select>
-          </div> */}
-          {/* Notes */}
-          {/* <div className="md:col-span-3">
-            <label htmlFor="notes" className="block text-sm font-medium text-gray-700">Notes</label>
-            <textarea
-              id="notes"
-              name="notes"
-              rows={3}
-              value={formData.notes}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            ></textarea>
-          </div> */}
-        </div>
-        </div>
-
-        {/* Remove the Add Listing button from here */}
-        {/*
-        <div className="pt-5">
-          <div className="flex justify-end">
-            <button
-              type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            >
-              Add Listing
-            </button>
           </div>
+
+          {/* Submit Button */}
+
         </div>
-        */}
       </form>
     </section>
   );

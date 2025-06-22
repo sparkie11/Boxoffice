@@ -216,7 +216,7 @@ const TableSection: React.FC<TableSectionProps> = ({
             <div className="w-10 px-4 py-2 sticky left-0  z-10 border-r border-gray-400">
               <div className="w-3 h-3 rounded-full bg-white mr-1"></div>
             </div>
-            <h2 className="text-lg font-semibold">Chelsea vs Arsenal – Premier League</h2>
+            <h2 className="text-lg flex gap-1 font-semibold">Chelsea vs Arsenal  <span className="hidden sm:block">  – Premier League </span> </h2>
           </div>
           <div className="flex flex-wrap items-center text-sm ml-4 gap-2">
             <div className="flex items-center space-x-4 pr-2 pl-8 border-r border-gray-400">
