@@ -1,15 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  FaHome,
-  FaPlus,
-  FaList,
-  FaShoppingCart,
-  FaChartLine,
-  FaTicketAlt,
-  FaCog,
-} from 'react-icons/fa';
+import { navItems } from '../lib/constants';
 
 const Header: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +14,7 @@ const Header: React.FC = () => {
     <>
       <header className="bg-custom-light-blue shadow-sm p-4 flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-custom-dark-blue text-xl font-semibold">Add Inventory</h1>
+          <h1 className="text-[#130562] text-xl font-semibold">Add Inventory</h1>
         </div>
 
         {/* Desktop icons */}
@@ -77,27 +69,11 @@ const Header: React.FC = () => {
               </button>
             </div>
             <nav className="flex flex-col space-y-2">
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaHome className="mr-2" /> Home
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-blue hover:bg-custom-light-blue flex items-center">
-                <FaPlus className="mr-2" /> Add Inventory
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaList className="mr-2" /> Inventory List
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaShoppingCart className="mr-2" /> Orders
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaChartLine className="mr-2" /> Analytics
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaTicketAlt className="mr-2" /> Events
-              </a>
-              <a href="#" className="p-2 rounded-md text-custom-dark-blue hover:bg-custom-light-blue flex items-center">
-                <FaCog className="mr-2" /> Settings
-              </a>
+              {navItems.map((item, index) => (
+                <a key={index} href={item.href} className={`p-2 rounded-md ${item.text === 'Add Inventory' ? 'text-custom-blue' : 'text-custom-dark-blue'} hover:bg-custom-light-blue flex items-center`}>
+                  <item.icon className="mr-2" /> {item.text}
+                </a>
+              ))}
             </nav>
           </div>
         </div>
