@@ -34,7 +34,7 @@ body {
   z-index: 1;
 }
 select, input, .relative > #dateToShip{
-  border: 1px solid grey;
+  border: 1px solid #c2bcbc;
 }
 #matchEvent, #dateToShip, #dateToShip:focus{
   border: 1px solid transparent;
@@ -48,11 +48,56 @@ select, input, .relative > #dateToShip{
   column-gap: 10px;
 }
 .border-end{
-  border-right: 1px solid grey;
+  border-right: 1px solid #c2bcbc;
 }
 .input-padding-left{
   padding-left: 50px !important;
 }
 .logo-left{
   left: 35px;
+}
+select{
+  padding-left: 5px !important;
+  padding-right: 10px !important;
+}
+.custom-table-header-width{
+  width: 412px;
+}
+input[type="checkbox"]{
+  background-color: gray;
+}
+tr th:nth-child(3),
+tr th:nth-child(5){
+  width: 50px;
+}
+input,
+select{
+  border: 1px solid #c2bcbc;
+}
+input:focus,
+select:focus{
+  border: 1px solid #000;
+}
+.hide-scrollbar::-webkit-scrollbar{
+  display: none !important;
+}
+.capitalize-first{
+  text-transform: capitalize;
+  font-size: 14px;
+}
+.border-r-custom{
+  position: relative;
+}
+.border-r-custom::after{
+  content: '';
+    display: flex !important;
+    position: absolute;
+    width: 1px;
+    height: 73px !important;
+    background-color: lightgray;
+    left: 0px;
+    top: -20px;
+}
+tr:hover td.bg-white{
+  background-color: #EFF1FD;
 }

@@ -171,7 +171,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
           {/* <div className='flex  '> */}
           <div className="md:col-span-3  flex flex-wrap items-center sm:justify-start gap-2 relative  mt-2 md:flex md:justify-start md:items-center  ">
             <label htmlFor="matchEvent" className="block placeholder-absolute text-sm font-medium text-gray-700">Choose Match Event</label>
-            <div className=" flex items-center border border-gray-300 rounded-md shadow-sm p-2">
+            <div className=" flex items-center border border-gray-300 rounded-md p-2">
               <select
                 id="matchEvent"
                 name="matchEvent"
@@ -190,24 +190,24 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
               </button>
             </div>
             <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5 text-[#C1E8FA]" fill="#C1E8FA" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#6BC7F4"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z"/></svg>              
               <input
-                type="date"
+                type="text"
                 id="dateToShip"
                 name="dateToShip"
                 value={formData.dateToShip}
                 onChange={handleChange}
-                className="text-sm border-0 border-focus focus:ring-0 focus:border-none"
+                className="text-sm border-0 border-focus focus:ring-0 w-21 focus:border-none"
               />
             </div>
             <div className="">|</div>
             <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5 text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <svg className="h-5 w-5 text-[#C1E8FA]" fill="none" stroke="#6BC7F4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <span>{formData.matchTime}</span>
             </div>
             <div className="">|</div>
             <div className="flex items-center space-x-2">
-              <svg className="h-5 w-5  text-[#C1E8FA]" fill="none" stroke="#155dfc" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <svg className="h-5 w-5  text-[#6BC7F4]" fill="none" stroke="#6BC7F4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               <span>{formData.matchLocation}</span>
             </div>
             <div className="ml-auto">
@@ -218,10 +218,10 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
            
 
            </div>
-           <div className='mb-4 border-t-2 border-gray-200  p-6'>
+           <div className='mb-1 border-t-2 border-gray-200  p-6 pb-0'>
           {/* Group of 5 fields in one row */}
           {/* <hr className=''/> */}
-          <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4  pb-6">
+          <div className="md:col-span-4 grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-6 gap-4">
             {/* Ticket Type */}
             <div className='relative mb-4'>
               <label htmlFor="ticketType" className="placeholder-absolute block text-sm font-medium text-gray-700">Ticket Type<span className="text-red-500">*</span></label>
@@ -253,7 +253,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="quantity"
                 value={formData.quantity}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-blue-500 focus:focus:border-blue-500 sm:text-sm"
               />
               {errors.quantity && <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>}
 
@@ -305,7 +305,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="maxDisplayQuantity"
                 value={formData.maxDisplayQuantity}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
           {/* </div> */}
@@ -421,7 +421,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
           {/* Face Value */}
           <div className='relative mb-4'>
             <label htmlFor="faceValue" className="placeholder-absolute logo-left block text-sm font-medium text-gray-700">Face Value</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="mt-1 relative rounded-md">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <div className="border-end py-2 pr-3">
                   <span className="text-gray-500 sm:text-sm">£</span>
@@ -433,7 +433,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="faceValue"
                 value={formData.faceValue}
                 onChange={handleChange}
-                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
+                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 
                 placeholder="0.00"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -445,7 +445,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
           {/* Payout Price */}
           <div className='relative mb-4'>
             <label htmlFor="payoutPrice" className="placeholder-absolute  logo-left block text-sm font-medium text-gray-700">Payout Price</label>
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="mt-1 relative rounded-md">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <div className="border-end py-2 pr-3">
                 <span className="text-gray-500 sm:text-sm">£</span>
@@ -457,7 +457,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="payoutPrice"
                 value={formData.payoutPrice}
                 onChange={handleChange}
-                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="block w-full input-padding-left pr-12 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 placeholder="0.00"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -505,7 +505,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             {/* Last Seat */}
             <div className='relative mb-4'>
             <label htmlFor="dateToShip" className="placeholder-absolute block text-sm font-medium text-gray-700">Date to Ship<span className="text-red-500">*</span></label>
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="mt-1 relative rounded-md">
               <input
                 type="date"
                 id="dateToShip"
@@ -521,15 +521,13 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
 
             {/* Tickets in Hand Checkbox */}
             <div className="flex items-center mb-4">
-              <div className="rounded-md border flex items-center justify-between w-full">
-                <div className="border-end pl-3 py-2 pr-3"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M512-40q-82 0-154-37.5T240-182L48-464l19-19q20-21 49.5-24t53.5 14l110 76v-383q0-17 11.5-28.5T320-840q17 0 28.5 11.5T360-800v537L212-366l95 138q35 51 89 79.5T512-120q103 0 175.5-72.5T760-368v-392q0-17 11.5-28.5T800-800q17 0 28.5 11.5T840-760v392q0 137-95.5 232.5T512-40Zm-72-440v-400q0-17 11.5-28.5T480-920q17 0 28.5 11.5T520-880v400h-80Zm160 0v-360q0-17 11.5-28.5T640-880q17 0 28.5 11.5T680-840v360h-80ZM486-300Z"/></svg></div>
+              <div className="rounded-md border border-gray-300 flex items-center justify-between w-full">
+                <div className="border-end border-gray-300 pl-3 py-2 pr-3"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M512-40q-82 0-154-37.5T240-182L48-464l19-19q20-21 49.5-24t53.5 14l110 76v-383q0-17 11.5-28.5T320-840q17 0 28.5 11.5T360-800v537L212-366l95 138q35 51 89 79.5T512-120q103 0 175.5-72.5T760-368v-392q0-17 11.5-28.5T800-800q17 0 28.5 11.5T840-760v392q0 137-95.5 232.5T512-40Zm-72-440v-400q0-17 11.5-28.5T480-920q17 0 28.5 11.5T520-880v400h-80Zm160 0v-360q0-17 11.5-28.5T640-880q17 0 28.5 11.5T680-840v360h-80ZM486-300Z"/></svg></div>
                 <div className="flex items-center w-full justify-between pl-3 pr-3">
                   <label htmlFor="ticketsInHand" className=" block flex items-center gap-2 text-sm font-medium text-gray-700">
                     Tickets 
                     <span className="ml-1 text-gray-400 cursor-pointer" title="Indicates if you physically possess the tickets.">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="gray"><path d="M440-280h80v-240h-80v240Zm40-320q17 0 28.5-11.5T520-640q0-17-11.5-28.5T480-680q-17 0-28.5 11.5T440-640q0 17 11.5 28.5T480-600Zm0 520q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
                   </span>
                   </label>
                   
@@ -547,8 +545,8 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
             <button
               type="button"
               // disabled
-              className="inline-flex items-center pr-3 border border-gray-600 mb-4 p-0 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            ><div className="border-end pl-3 py-2 pr-3">
+              className="inline-flex items-center pr-3 border border-gray-300 mb-4 p-0 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            ><div className="border-end border-gray-300 pl-3 py-2 pr-3">
               <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
             </div>
               <span className='pl-3 '>Upload Tickets</span>

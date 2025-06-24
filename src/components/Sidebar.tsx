@@ -1,9 +1,11 @@
 // src/components/Sidebar.tsx
 import Image from 'next/image';
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import { navItems, logoutItem } from '../lib/constants';
 
 const Sidebar: React.FC = () => {
+  const pathname = usePathname();
   return (
     <aside className="hidden sm:flex w-20 text-white flex-col items-center py-4 bg-custom-dark-blue" style={{backgroundColor:"#130562"}}>
       <div className="mb-8">
@@ -11,7 +13,7 @@ const Sidebar: React.FC = () => {
       </div>
       <nav className="flex flex-col space-y-6 flex-grow">
         {navItems.map((item, index) => (
-          <a key={index} href={item.href} className={`p-2 rounded-md hover:bg-gray-700 ${item.text === 'Add Inventory' ? 'bg-custom-blue' : ''}`}>
+          <a key={index} href={item.href} className={`p-2 rounded-md ${pathname === item.href ? 'bg-[#00A3EE]' : 'hover:bg-[#33beff]'} ${item.text === 'Add Inventory' ? 'bg-custom-blue' : ''}`}>
             <item.icon size={24} />
           </a>
         ))}
