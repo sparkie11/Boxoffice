@@ -14,7 +14,7 @@ const Sidebar: React.FC = () => {
       <nav className="flex flex-col space-y-6 flex-grow">
         {navItems.map((item, index) => (
           <a key={index} href={item.href} className={`p-2 rounded-md ${pathname === item.href ? 'bg-[#00A3EE]' : 'hover:bg-[#33beff]'} ${item.text === 'Add Inventory' ? 'bg-custom-blue' : ''}`}>
-            <item.icon size={24} />
+            <item.icon size={24} /> 
           </a>
         ))}
       </nav>
