@@ -63,6 +63,25 @@ select{
 .custom-table-header-width{
   width: 412px;
 }
+.border-none{
+  border-right: 1px solid var(--color-gray-400);
+  
+  }
+@media (max-width: 600px) { 
+  .custom-table-header-width {
+    width: 212px !important;
+  }
+  .border-none{
+  border: none;
+  }
+}
+
+@media (max-width: 800px) { 
+
+  .border-none{
+  border: none;
+  }
+}
 input[type="checkbox"]{
   background-color: gray;
 }

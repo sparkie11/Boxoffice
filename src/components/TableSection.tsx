@@ -209,18 +209,18 @@ const TableSection: React.FC<TableSectionProps> = ({
         style={{ backgroundColor: '#130562' }}
       >
         <div className="flex items-center flex-grow flex-wrap">
-          <div className="flex items-center space-x-2 pr-2 border-r border-gray-400 flex-shrink-0">
+          <div className="flex items-center space-x-2  border-r border-gray-400 flex-shrink-0 border-none">
             <div className="w-12 px-4 py-3 sticky left-0  z-10 border-r border-gray-400">
               {/* <div className="w-3 h-3 rounded-full bg-white mr-1"></div> */}
               <input type="radio" name="" id="" className="w-4 h-4" />
             </div>
             <h6 className="text-sm flex gap-1 font-semibold custom-table-header-width">
-              Chelsea vs Arsenal{' '}
+              Chelsea vs Arsenal
               <span className="hidden sm:block"> – Premier League </span>{' '}
             </h6>
           </div>
-          <div className="flex flex-wrap items-center text-sm ml-4 gap-2">
-            <div className="flex items-center space-x-4 pr-8 h-10 border-r border-gray-500">
+          <div className=" flex-wrap items-center text-sm ml-4 gap-2 hidden md:flex">
+            <div className="flex items-center space-x-4 pr-8 h-10 border-r border-gray-500 border-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="20px"
@@ -232,7 +232,7 @@ const TableSection: React.FC<TableSectionProps> = ({
               </svg>
               <span>Sun, 10 Nov 2024</span>
             </div>
-            <div className="flex items-center space-x-2 px-2 border-r h-10 border-gray-500 pr-8">
+            <div className="flex items-center space-x-2 px-2 border-r h-10 border-gray-500 border-none pr-8">
               <svg
                 className="h-5 w-5 text-white"
                 fill="none"
