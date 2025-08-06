@@ -7,6 +7,7 @@ import Overview from '@/components/Overview';
 import TableSectionDynamic from '@/components/TableSectionDynamic';
 import { useState, useEffect } from 'react';
 import { TicketHistoryResponse } from '@/types/ticketHistoryTypes';
+import FilterComponent from '@/components/filterComponent';
 
 export default function Inventory() {
   const [ticketHistoryData, setTicketHistoryData] = useState<TicketHistoryResponse>({
@@ -102,6 +103,7 @@ export default function Inventory() {
         <HeaderInventory matchName={matchName} />
         <FilterSubHead />
         <Overview />
+        <FilterComponent/>
         <TableSectionDynamic ticketHistoryData={ticketHistoryData} />
       </div>
       <div className="flex flex-wrap justify-center gap-2 sm:space-x-4 absolute bottom-0 left-0 sm:left-20 w-full sm:w-[calc(100%-5rem)] bg-white border-t z-40 border-gray-200 p-4 box-border">

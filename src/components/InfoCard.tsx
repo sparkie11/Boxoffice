@@ -15,7 +15,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, value ,tickets , checkbox })
       <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
       <div className=' flex   '>
         {tickets != 0 && (
-          <div className='p-1 text-xs font-bold bg-gray-200 p-'>
+          <div className='p-1 text-xs text-[#4D5481] font-bold bg-[#F8F8FA] p-'>
 <p> {tickets } tickets </p>
 
           </div>
