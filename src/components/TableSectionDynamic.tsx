@@ -17,8 +17,8 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   const [inventory, setInventory] = useState<InventoryItem[]>([])
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [filteredInventory, setFilteredInventory] = useState<InventoryItem[]>([])
-  const [filters, setFilters] = useState<Record<keyof InventoryItem, Set<any>>>({} as Record<keyof InventoryItem, Set<any>>)
-  const [clonedItemIds, setClonedItemIds] = useState<string[]>([])
+  const [filters, setFilters] = useState<Record<keyof InventoryItem, Set<string>>>({} as Record<keyof InventoryItem, Set<string>>)
+
 
   const uniqueMatchNames = useMemo(() => {
     const names = new Set<string>();
@@ -28,17 +28,17 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
   console.log(inventory,"qinventory")
 
-  const handleCloneItem = (id: string) => {
-    setInventory(prevInventory => {
-      const itemToClone = prevInventory.find(item => item.id === id);
-      if (!itemToClone) return prevInventory;
+  // const handleCloneItem = (id: string) => {
+  //   setInventory(prevInventory => {
+  //     const itemToClone = prevInventory.find(item => item.id === id);
+  //     if (!itemToClone) return prevInventory;
 
-      const clonedItem = { ...itemToClone, id: `${itemToClone.id}-clone-${Date.now()}` };
-      const newInventory = [...prevInventory, clonedItem];
-      setClonedItemIds(prev => [...prev, clonedItem.id]);
-      return newInventory;
-    });
-  };
+  //     const clonedItem = { ...itemToClone, id: `${itemToClone.id}-clone-${Date.now()}` };
+  //     const newInventory = [...prevInventory, clonedItem];
+  //     setClonedItemIds(prev => [...prev, clonedItem.id]);
+  //     return newInventory;
+  //   });
+  // };
 
   // Column key mapping for filters
   const columnKeyMap: Record<string, keyof InventoryItem> = {
@@ -81,7 +81,6 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
         return item.tickets.map(ticket => ({
           id: `${matchInfo.m_id}-${ticket.s_no}`,
           ticketsInHand: ticket.ticket_in_hand === 1, // Convert to boolean
-          ticketInHand: ticket.ticket_in_hand === 1 ? 1 : 0, // Convert to number (1 or 0)
           ticketStatus: ticket.ticket_in_hand === 1 ? 'In Hand' : 'Not In Hand', // Map to a status string
           listingId: ticket.s_no.toString(),
           matchEvent: matchInfo.match_name,
@@ -105,7 +104,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
           firstSeat: (ticket.first_seat === null || ticket.first_seat === '') ? '1' : ticket.first_seat as '1' | '2' | '3' | '4' | '5',
           lastSeat: ticket.seat ? ticket.seat.toString() : undefined,
           splitType: ticket.split.name as InventoryItem['splitType'],
-          notes: ticket.listing_note ? ticket.listing_note.map((note: { name: any; }) => note.name).join(', ') : '',
+          notes: ticket.listing_note ? ticket.listing_note.map(note => note.name).join(', ') : '',
           barcode: 'N/A',
           serialNumber: ticket.s_no.toString(),
           ticketId: ticket.s_no.toString(),
@@ -130,7 +129,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
     let currentFilteredInventory = inventory;
     Object.entries(filters).forEach(([key, values]) => {
       if (values.size > 0) {
-        currentFilteredInventory = currentFilteredInventory.filter(item => values.has(item[key as keyof InventoryItem]));
+        currentFilteredInventory = currentFilteredInventory.filter(item => values.has(String(item[key as keyof InventoryItem])));
       }
     });
     setFilteredInventory(currentFilteredInventory);
@@ -171,15 +170,15 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
 
 
-  const handleDeleteItem = async (id: string) => {
-    try {
-      await deleteInventoryItem(id);
-      setInventory(prev => prev.filter(item => item.id !== id));
-      setFilteredInventory(prev => prev.filter(item => item.id !== id));
-    } catch (error) {
-      console.error("Failed to delete item:", error);
-    }
-  };
+  // const handleDeleteItem = async (id: string) => {
+  //   try {
+  //     await deleteInventoryItem(id);
+  //     setInventory(prev => prev.filter(item => item.id !== id));
+  //     setFilteredInventory(prev => prev.filter(item => item.id !== id));
+  //   } catch (error) {
+  //     console.error("Failed to delete item:", error);
+  //   }
+  // };
 
   // 2️⃣  Check horizontal scroll ability on mount + scroll + resize.
   useEffect(() => {
@@ -255,10 +254,12 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   }
 
   // Handle cell value change
-  const handleCellChange = (id: string, field: keyof InventoryItem, value: any) => {
+  const handleCellChange = (id: string, field: keyof InventoryItem, value: string | number) => {
     setInventory(prev =>
       prev.map(item =>
-        item.id === id ? { ...item, [field]: value } : item
+        item.id === id ? { ...item, [field]:
+          (field === 'quantity' || field === 'maxDisplayQuantity') ? Number(value) : value
+        } : item
       )
     )
     setFilteredInventory(prev =>
@@ -292,7 +293,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
     setFilters(prev => {
       const newFilters = { ...prev }
       if (!newFilters[key]) {
-        newFilters[key] = new Set<any>()
+        newFilters[key] = new Set<string>()
       }
       
       if (newFilters[key].has(option)) {
@@ -313,8 +314,9 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
     Object.entries(filters).forEach(([key, values]) => {
       if (values.size > 0) {
         result = result.filter(item => {
-          const itemValue = String(item[key as keyof InventoryItem])
-          return Array.from(values).some(value => itemValue === value)
+          const itemValue = item[key as keyof InventoryItem];
+          return Array.from(values).some(value => String(itemValue) === value)
+
         })
       }
     })
@@ -336,7 +338,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
   return (
     <>
-      {uniqueMatchNames.map((matchName, index) => {
+      {uniqueMatchNames.map((matchName) => {
         const matchInfo = ticketHistoryData?.data?.data?.find(
           item => item.match_info?.match_name === matchName
         )?.match_info;
@@ -688,27 +690,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     />
                   </td>
                   <td className="bg-white text-sm text-gray-900 flex space-x-2 w-42 px-4 py-5 sticky right-0">
-                  <button
-                      onClick={() => handleCloneItem(item)}
-                      className={`${
-                        clonedItemIds.includes(item.id)
-                          ? 'text-green-500'
-                          : 'text-black'
-                      } hover:text-blue-900`}
-                    >
-                      <svg
-                        fill="currentColor"
-                        strokeWidth="0"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                        height="20px"
-                        width="20px"
-                        style={{ overflow: 'visible', color: 'currentcolor' }}
-                      >
-                        <path d="M256 0c-25.3 0-47.2 14.7-57.6 36-7-2.6-14.5-4-22.4-4-35.3 0-64 28.7-64 64v165.5l-2.7-2.7c-25-25-65.5-25-90.5 0s-25 65.5 0 90.5l87.7 87.7c48 48 113.1 75 181 75H304c1.5 0 3-.1 4.5-.4 91.7-6.2 165-79.4 171.1-171.1.3-1.5.4-3 .4-4.5V160c0-35.3-28.7-64-64-64-5.5 0-10.9.7-16 2v-2c0-35.3-28.7-64-64-64-7.9 0-15.4 1.4-22.4 4C303.2 14.7 281.3 0 256 0zm-16 96.1V64c0-8.8 7.2-16 16-16s16 7.2 16 16v168c0 13.3 10.7 24 24 24s24-10.7 24-24V95.9c0-8.8 7.2-16 16-16s16 7.2 16 16v136c0 13.3 10.7 24 24 24s24-10.7 24-24V160c0-8.8 7.2-16 16-16s16 7.2 16 16v172.9c-.1.6-.1 1.3-.2 1.9-3.4 69.7-59.3 125.6-129 129-.6 0-1.3.1-1.9.2h-13.4c-55.2 0-108.1-21.9-147.1-60.9l-87.7-87.8c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l43.7 43.7c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V96c0-8.8 7.2-16 16-16s16 7.1 16 15.9V232c0 13.3 10.7 24 24 24s24-10.7 24-24V96.1z"></path>
-                      </svg>
-                    </button>
-                    <div className="h-6 border-r-custom"></div>
+
                     <button
                       // onClick={() => handleEditItem(item)}
                       className="text-black hover:text-red-900"
@@ -744,16 +726,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     </button>
                     <div className="h-6 border-r-custom"></div>
   
-                    <button
-                      onClick={() => handleCloneItem(item)}
-                      className={`${
-                        clonedItemIds.includes(item.id)
-                          ? 'text-green-500'
-                          : 'text-black'
-                      } hover:text-blue-900`}
-                    >
-<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg>
-                    </button>
+
                   </td>
                 </tr>
               ))}

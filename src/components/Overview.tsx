@@ -14,7 +14,6 @@ interface OverviewData {
 }
 
 const Overview: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
 
   const [data, setData] = useState<OverviewData | null>(null);

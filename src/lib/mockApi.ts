@@ -1,5 +1,4 @@
 
-
 export interface InventoryItem {
     id: string;
     ticketType: 'E-ticket' | 'Physical' | 'Local Delivery' | 'Flash Seats' | 'Mobile Transfer' | 'None' ;
@@ -25,7 +24,7 @@ export interface InventoryItem {
     time: string;
     venue: string;
     stadium: string;
-    ticketInHand: string;
+
     ticketStatus: string;
     serialNumber: string;
     listingId: string;
@@ -50,8 +49,8 @@ export interface InventoryItem {
     addBy?: number;
     storeId?: number;
     sourceType?: string;
-    uploadTickets?: Array<any>; // This can be refined with a more specific type if needed
-    popUpload?: Array<any>; // This can be refined with a more specific type if needed
+    uploadTickets?: Array<{ id: number; ticket_type: number; additional_dynamic_content?: string; qr_links?: { android: string[]; ios: string[] }; upload_tickets?: string }>;
+    popUpload?: Array<{ id: number; ticket_type: number; additional_dynamic_content?: string; qr_links?: { android: string[]; ios: string[] }; upload_tickets?: string }>;
     tournamentName?: string;
     city_name?: string;
     country_name?: string;
@@ -82,6 +81,15 @@ export interface InventoryItem {
       notes: 'These are premium tickets with excellent views.',
       benefits: 'None',
       restrictions: 'None',
+      date: '2024-11-10',
+      time: '15:00',
+      venue: 'Stamford Bridge',
+      stadium: 'Stamford Bridge',
+      serialNumber: 'SN001',
+      listingId: 'LST001',
+      ticketId: 'TKT001',
+      matchId: 'MCH001',
+      barcode: 'BC001',
 
       ticketTypeId: 4,
       ticketCategoryId: 13,
@@ -129,6 +137,15 @@ export interface InventoryItem {
       notes: 'Physical tickets will be shipped via courier.',
       benefits: 'Free Parking',
       restrictions: 'Age Limit',
+      date: '2024-12-01',
+      time: '17:30',
+      venue: 'Old Trafford',
+      stadium: 'Old Trafford',
+      serialNumber: 'SN002',
+      listingId: 'LST002',
+      ticketId: 'TKT002',
+      matchId: 'MCH002',
+      barcode: 'BC002',
 
       ticketTypeId: 3,
       ticketCategoryId: 13,
@@ -182,6 +199,15 @@ export interface InventoryItem {
       notes: 'Mobile transfer tickets, will be sent 24 hours before the match.',
       benefits: 'VIP Access',
       restrictions: 'No Re-entry',
+      date: '2025-01-15',
+      time: '20:00',
+      venue: 'Camp Nou',
+      stadium: 'Camp Nou',
+      serialNumber: 'SN003',
+      listingId: 'LST003',
+      ticketId: 'TKT003',
+      matchId: 'MCH003',
+      barcode: 'BC003',
 
       ticketTypeId: 2,
       ticketCategoryId: 10,
