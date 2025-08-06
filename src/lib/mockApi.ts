@@ -47,6 +47,7 @@ export interface InventoryItem {
     track?: string;
     sellType?: string;
     matchTime?: string;
+    matchLocation?: string;
     addBy?: number;
     storeId?: number;
     sourceType?: string;
