@@ -85,6 +85,7 @@ export interface UploadTicket {
       category: 'Away Fans Section',
       sectionBlock: 'Longside Lower Tier',
       row: '5',
+      matchTime:'4',
       firstSeat: '3',
       lastSeat: '4',
       faceValue: 90000,
@@ -136,6 +137,8 @@ export interface UploadTicket {
       quantity: 2,
       splitType: 'Even',
       seatingArrangement: 'Seated Together',
+      matchTime:'4',
+
       maxDisplayQuantity: 2,
       fanArea: 'Away',
       category: 'Lower Tier',
@@ -199,6 +202,8 @@ export interface UploadTicket {
       splitType: 'None',
       seatingArrangement: 'Aisle Seats',
       maxDisplayQuantity: 4,
+      matchTime:'4',
+
       fanArea: 'Home',
       category: 'Club Level',
       sectionBlock: 'Longside Upper Tier',
