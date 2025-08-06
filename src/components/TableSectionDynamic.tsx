@@ -26,6 +26,8 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
     return Array.from(names);
   }, [inventory]);
 
+  console.log(inventory,"qinventory")
+
   const handleCloneItem = (id: string) => {
     setInventory(prevInventory => {
       const itemToClone = prevInventory.find(item => item.id === id);
@@ -79,17 +81,16 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
         return item.tickets.map(ticket => ({
           id: `${matchInfo.m_id}-${ticket.s_no}`,
           ticketsInHand: ticket.ticket_in_hand === 'Yes', // Convert 'Yes'/'No' string to boolean
-          ticketInHand: ticket.ticket_in_hand, // Assign the string value
+          ticketInHand: ticket.ticket_in_hand === 'Yes' ? 1 : 0, // Convert 'Yes'/'No' string to number (1 or 0)
             matchEvent: matchInfo.match_name,
             date: matchInfo.match_date,
           time: matchInfo.match_time,
           venue: matchInfo.venue.toString(),
           stadium: matchInfo.stadium_name,
-          ticketType: ticket.ticket_type,
-          category: ticket.ticket_category,
+          ticketType: ticket.ticket_type as InventoryItem['ticketType'],
+          category: ticket.ticket_category as InventoryItem['category'],
           quantity: ticket.quantity,
           payoutPrice: ticket.price,
-          ticketsInHand: ticket.ticket_in_hand,
           maxDisplayQuantity: ticket.quantity, // Assuming quantity can be maxDisplayQuantity
           faceValue: 0, // Default value, as it's not in the API response
           seatingArrangement: 'Seated Together', // Default value
@@ -98,7 +99,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
           benefits: 'None', // Default value
           restrictions: 'None', // Default value
           ticketStatus: 'Available', // Assuming a default or deriving from other fields if needed
-          sectionBlock: ticket.ticket_block,
+          sectionBlock: ticket.ticket_block as InventoryItem['sectionBlock'] || 'Block 1',
           row: ticket.row,
           firstSeat: ticket.first_seat,
           lastSeat: ticket.seat ? ticket.seat.toString() : undefined,
@@ -298,6 +299,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
         if (matchFilteredInventory.length === 0) {
           return null; // Don't render a table if there are no items for this match
         }
+        console.log(matchFilteredInventory,"matchFilteredInventory")
 
         return (
           <React.Fragment key={matchName}>
@@ -473,7 +475,8 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
               </tr>
             </thead>
             <tbody>
-              {filteredInventory.map(item => (
+              {matchFilteredInventory.map(item => (
+                // console.log(item,"")
                 <tr key={item.id} className="border-b border-gray-200">
                   <td className="px-4 py-2 sticky left-0 bg-white z-10 border-r border-gray-200 group-hover:bg-[#EFF1FD]">
                     <input
@@ -501,7 +504,8 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       onChange={e =>
                         handleCellChange(item.id, 'ticketType', e.target.value)
                       }
-                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:// ... existing code ...
+ring-blue-500"
                     />
                   </td>
                   <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
