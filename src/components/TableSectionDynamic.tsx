@@ -11,9 +11,9 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [openFilter, setOpenFilter] = useState<string | null>(null)
-  const [isTableVisible, setIsTableVisible] = useState<boolean>(true) // New state for table visibility
-  
-  // Add missing states
+  const [isTableVisible, setIsTableVisible] = useState<Record<string, boolean>>({}) // State for table visibility per match
+
+    // Add missing states
   const [inventory, setInventory] = useState<InventoryItem[]>([])
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [filteredInventory, setFilteredInventory] = useState<InventoryItem[]>([])
@@ -80,10 +80,12 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
         const matchInfo = item.match_info;
         return item.tickets.map(ticket => ({
           id: `${matchInfo.m_id}-${ticket.s_no}`,
-          ticketsInHand: ticket.ticket_in_hand === 'Yes', // Convert 'Yes'/'No' string to boolean
-          ticketInHand: ticket.ticket_in_hand === 'Yes' ? 1 : 0, // Convert 'Yes'/'No' string to number (1 or 0)
-            matchEvent: matchInfo.match_name,
-            date: matchInfo.match_date,
+          ticketsInHand: ticket.ticket_in_hand === 1, // Convert to boolean
+          ticketInHand: ticket.ticket_in_hand === 1 ? 1 : 0, // Convert to number (1 or 0)
+          ticketStatus: ticket.ticket_in_hand === 1 ? 'In Hand' : 'Not In Hand', // Map to a status string
+          listingId: ticket.s_no.toString(),
+          matchEvent: matchInfo.match_name,
+          date: matchInfo.match_date,
           time: matchInfo.match_time,
           venue: matchInfo.venue.toString(),
           stadium: matchInfo.stadium_name,
@@ -98,24 +100,72 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
           fanArea: 'Neutral', // Default value
           benefits: 'None', // Default value
           restrictions: 'None', // Default value
-          ticketStatus: 'Available', // Assuming a default or deriving from other fields if needed
+          row: ticket.row as InventoryItem['row'],
           sectionBlock: ticket.ticket_block as InventoryItem['sectionBlock'] || 'Block 1',
-          row: ticket.row,
           firstSeat: ticket.first_seat,
           lastSeat: ticket.seat ? ticket.seat.toString() : undefined,
-          splitType: ticket.split ? ticket.split.type : 'None', // Assuming split has a 'type' property
+          splitType: ticket.split.name as InventoryItem['splitType'],
           notes: ticket.listing_note ? ticket.listing_note.map((note: { name: any; }) => note.name).join(', ') : '',
-          barcode: 'N/A', // Barcode is not in Ticket interface, setting to N/A or remove if not needed
+          barcode: 'N/A',
           serialNumber: ticket.s_no.toString(),
-          listingId: 'N/A', // listing_id is not in Ticket interface, setting to N/A or remove if not needed
-          ticketId: 'N/A', // ticket_id is not in Ticket interface, setting to N/A or remove if not needed
-          matchId: matchInfo.m_id.toString(),
+          ticketId: ticket.s_no.toString(),
+          matchId: matchInfo.m_id.toString() // Ensure matchId is a string
+        
         }));
       });
       setInventory(transformedData);
-      setFilteredInventory(transformedData);
     }
   }, [ticketHistoryData]);
+
+  useEffect(() => {
+    const initialVisibility: Record<string, boolean> = {};
+    uniqueMatchNames.forEach(matchName => {
+      initialVisibility[matchName] = true; // Set all tables to be visible by default
+    });
+    setIsTableVisible(initialVisibility);
+  }, [uniqueMatchNames]);
+
+  // Filter inventory based on selected filters
+  useEffect(() => {
+    let currentFilteredInventory = inventory;
+    Object.entries(filters).forEach(([key, values]) => {
+      if (values.size > 0) {
+        currentFilteredInventory = currentFilteredInventory.filter(item => values.has(item[key as keyof InventoryItem]));
+      }
+    });
+    setFilteredInventory(currentFilteredInventory);
+  }, [inventory, filters]);
+
+  // Handle scroll for table
+  useEffect(() => {
+    const tableContainer = tableContainerRef.current;
+    if (tableContainer) {
+      const handleScroll = () => {
+        setCanScrollLeft(tableContainer.scrollLeft > 0);
+        setCanScrollRight(tableContainer.scrollLeft < tableContainer.scrollWidth - tableContainer.clientWidth);
+      };
+
+      tableContainer.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initial check
+
+      return () => {
+        tableContainer.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
+
+  const scrollLeft = () => {
+    if (tableContainerRef.current) {
+      tableContainerRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (tableContainerRef.current) {
+      tableContainerRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
 
 
 
@@ -175,13 +225,13 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   /* ------------------------------------------------------------------ */
   /*                             HANDLERS                               */
   /* ------------------------------------------------------------------ */
-  const scrollLeft = () => {
-    tableContainerRef.current?.scrollBy({ left: -200, behavior: 'smooth' })
-  }
+  // const scrollLeft = () => {
+  //   tableContainerRef.current?.scrollBy({ left: -200, behavior: 'smooth' })
+  // }
 
-  const scrollRight = () => {
-    tableContainerRef.current?.scrollBy({ left: 200, behavior: 'smooth' })
-  }
+  // const scrollRight = () => {
+  //   tableContainerRef.current?.scrollBy({ left: 200, behavior: 'smooth' })
+  // }
 
   // Handle filter button click
   const handleFilterClick = (columnName: string) => {
@@ -385,29 +435,16 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
         <div className="flex items-center space-x-2 text-sm flex-shrink-0 px-4 border-[#423283] border-l h-10">
           <button
-            onClick={() => setIsTableVisible(!isTableVisible)}
+            onClick={() => setIsTableVisible(prevState => ({
+              ...prevState,
+              [matchName]: !prevState[matchName]
+            }))}
             className="p-1   hover:bg-gray-300"
             aria-label="Toggle Table Visibility"
           >
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`h-4 w-4 text-[#fff] transform ${
-                isTableVisible ? 'rotate-180' : ''
-              }`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 15l7-7 7 7"
-              />
-            </svg> */}
             <svg xmlns="http://www.w3.org/2000/svg"
                    className={`h-5 w-5 text-[#fff] transform ${
-                    isTableVisible ? '' : 'rotate-180'
+                    isTableVisible[matchName] ? '' : 'rotate-180'
                   }`} 
              height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M480-528 296-344l-56-56 240-240 240 240-56 56-184-184Z"/></svg>
           </button>
@@ -415,7 +452,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
       </div>
 
       {/* TABLE */}
-      {isTableVisible && (
+      {isTableVisible[matchName] && (
         <div
           ref={tableContainerRef}
           className="overflow-x-auto border border-gray-200 hide-scrollbar overflow-y-hidden rounded-md"

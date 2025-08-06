@@ -48,7 +48,7 @@ export default function Inventory() {
   return (
     <div className="flex flex-col sm:flex-row h-screen bg-gray-100">
       <Sidebar />
-      <div className="flex-1 flex flex-col overere">
+      <div className="flex-1 flex flex-col overflow-scroll">
         <HeaderInventory matchName={matchName} />
         <FilterSubHead />
         <Overview />
