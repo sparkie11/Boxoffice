@@ -52,11 +52,11 @@ const Overview: React.FC = () => {
       <div className="p-4 bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {data && data.data && (
           <>
-            <InfoCard title="Events" value={data.data.events} />
-            <InfoCard title="Listings" value={data.data.listings} tickets={data.data.tickets} />
-            <InfoCard title="Published Listings" value={data.data.published_listings} tickets={data.data.tickets} />
+            <InfoCard title="Events" value={data.data.events} tickets={0} checkbox={false} />
+            <InfoCard title="Listings" value={data.data.listings} tickets={data.data.tickets}  checkbox={false} />
+            <InfoCard title="Published Listings" value={data.data.published_listings} tickets={data.data.tickets} checkbox={true} />
             {/* <InfoCard title="Tickets" value={data.data.tickets} /> */}
-            <InfoCard title="Unpublished Listings" value={data.data.unpublished_listings} tickets={data.data.tickets} />
+            <InfoCard title="Unpublished Listings" value={data.data.unpublished_listings} tickets={data.data.tickets} checkbox={true} />
           </>
         )}
       </div>
