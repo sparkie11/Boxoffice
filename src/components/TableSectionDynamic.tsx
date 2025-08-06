@@ -17,7 +17,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   const [inventory, setInventory] = useState<InventoryItem[]>([])
   const [selectedItems, setSelectedItems] = useState<string[]>([])
   const [filteredInventory, setFilteredInventory] = useState<InventoryItem[]>([])
-  const [filters, setFilters] = useState<Record<keyof InventoryItem, Set<string>>>({} as Record<keyof InventoryItem, Set<string>>)
+  const [filters] = useState<Record<keyof InventoryItem, Set<string>>>({} as Record<keyof InventoryItem, Set<string>>)
 
 
   const uniqueMatchNames = useMemo(() => {
@@ -41,13 +41,13 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
   // };
 
   // Column key mapping for filters
-  const columnKeyMap: Record<string, keyof InventoryItem> = {
-    'Match Info': 'matchEvent',
-    'Ticket Type': 'ticketType',
-    'Category': 'category',
-    'Quantity': 'quantity',
-    'Price': 'payoutPrice'
-  }
+  // const columnKeyMap: Record<string, keyof InventoryItem> = {
+  //   'Match Info': 'matchEvent',
+  //   'Ticket Type': 'ticketType',
+  //   'Category': 'category',
+  //   'Quantity': 'quantity',
+  //   'Price': 'payoutPrice'
+  // }
 
   // Function to fetch ticket history data
   // async function getTicketHistoryData(): Promise<TicketHistoryResponse | null> {
