@@ -4,10 +4,10 @@ import React, { useState } from 'react'
 import { navItems } from '../lib/constants'
 
 interface HeaderInventoryProps {
-  matchName?: string;
+  // matchName?: string; // Currently unused
 }
 
-const HeaderInventory: React.FC<HeaderInventoryProps> = ({ matchName }) => {
+const HeaderInventory: React.FC<HeaderInventoryProps> = ({ /* matchName */ }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const toggleModal = () => {

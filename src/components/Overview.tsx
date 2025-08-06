@@ -3,14 +3,21 @@
 import React, { useState, useEffect } from 'react'
 import InfoCard from './InfoCard';
 
+interface OverviewData {
+  data: {
+    events: number;
+    listings: number;
+    published_listings: number;
+    tickets: number;
+    unpublished_listings: number;
+  };
+}
+
 const Overview: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen)
-  }
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<OverviewData | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 

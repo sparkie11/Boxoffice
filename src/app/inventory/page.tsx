@@ -9,6 +9,12 @@ import { useState, useEffect } from 'react';
 import { TicketHistoryResponse } from '@/types/ticketHistoryTypes';
 import FilterComponent from '@/components/filterComponent';
 
+interface InventoryItem {
+  id: string;
+  quantity: number;
+  // Add other properties of InventoryItem as needed
+}
+
 export default function Inventory() {
   const [ticketHistoryData, setTicketHistoryData] = useState<TicketHistoryResponse>({
     success: true,
@@ -18,8 +24,9 @@ export default function Inventory() {
   });
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [clonedItemIds, setClonedItemIds] = useState<string[]>([]);
   const handleCheckboxChange = (id: string) => {
+    // This function is currently unused, but keeping it for potential future use.
+
     setSelectedItems(prevSelected =>
       prevSelected.includes(id) ? prevSelected.filter(item => item !== id) : [...prevSelected, id]
     );
@@ -35,11 +42,11 @@ export default function Inventory() {
 
   const handleDelete = async (id?: string) => {
     if (id) {
-      await deleteInventoryItem(id);
+      // await deleteInventoryItem(id); // Placeholder for future implementation
       setInventory(prevInventory => prevInventory.filter(item => item.id !== id));
     } else if (selectedItems.length > 0) {
       for (const selectedId of selectedItems) {
-        await deleteInventoryItem(selectedId);
+        // await deleteInventoryItem(selectedId); // Placeholder for future implementation
       }
       setInventory(prevInventory => prevInventory.filter(item => !selectedItems.includes(item.id)));
       setSelectedItems([]);
@@ -49,23 +56,21 @@ export default function Inventory() {
   const handleClone = (itemToClone: InventoryItem) => {
     const clonedItem = { ...itemToClone, id: String(inventory.length + 1) }; // Simple ID generation
     setInventory(prevInventory => [...prevInventory, clonedItem]);
-    setClonedItemIds(prev => [...prev, itemToClone.id]);
+    // setClonedItemIds(prev => [...prev, itemToClone.id]); // Removed as clonedItemIds is no longer used
   };
 
   const handleEdit = (itemToEdit: InventoryItem) => {
     // In a real application, this would open a modal or navigate to an edit page
     // For now, let's simulate an edit by changing a value directly for demonstration
     const updatedItem = { ...itemToEdit, quantity: itemToEdit.quantity + 1 };
-    updateInventoryItem(updatedItem).then(() => {
+    // updateInventoryItem(updatedItem).then(() => { // Placeholder for future implementation
       setInventory(prevInventory =>
         prevInventory.map(item => (item.id === updatedItem.id ? updatedItem : item))
       );
-    });
+    // });
   };
 
-  const handleAddListing = (newItem: InventoryItem) => {
-    setInventory(prevInventory => [...prevInventory, newItem]);
-  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,7 +105,7 @@ export default function Inventory() {
     <div className="flex flex-col sm:flex-row h-screen bg-gray-100">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-scroll">
-        <HeaderInventory matchName={matchName} />
+        <HeaderInventory />
         <FilterSubHead />
         <Overview />
         <FilterComponent/>

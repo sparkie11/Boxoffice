@@ -3,9 +3,9 @@ import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog
 export const navItems = [
 
   
-  { icon: FaArrowRight, text: 'Right', href: '#' },
-  { icon: "MJ", text: 'Home', href: '#' },
-  { icon: FaPlus, text: 'Add Inventory', href: '#' },
+  { icon: FaArrowRight, text: 'Right', href: '/' },
+  { icon: "MJ", text: 'Home', href: '/inventory' },
+  { icon: FaPlus, text: 'Add Inventory', href: '#1' },
   { icon: FaList, text: 'Inventory List', href: '/inventory' },
   { icon: FaShoppingCart, text: 'Orders', href: '#' },
   { icon: FaChartLine, text: 'Analytics', href: '#' },
