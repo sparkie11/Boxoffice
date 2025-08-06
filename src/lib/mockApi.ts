@@ -20,8 +20,41 @@ export interface InventoryItem {
     notes: string;
     benefits: 'None' | 'Free Parking' | 'VIP Access' | 'Food and Beverage Included' | 'Merchandise Discount';
     restrictions: 'None' | 'Age Limit' | 'Bag Policy' | 'No Re-entry' | 'Camera Restrictions';
-    matchTime: string;
-    matchLocation: string;
+    date: string;
+    time: string;
+    venue: string;
+    stadium: string;
+    ticketInHand: string;
+    ticketStatus: string;
+    serialNumber: string;
+    listingId: string;
+    ticketId: string;
+    matchId: string;
+    barcode: string;
+    ticketTypeId?: number;
+    ticketCategoryId?: number;
+    homeTown?: string;
+    seat?: number;
+    priceType?: string;
+    shipDate?: string | null;
+    price?: number;
+    priceGbp?: number;
+    webPrice?: number | null;
+    listingNote?: Array<{ id: number; name: string }>;
+    split?: { id: number; name: string };
+    sellDate?: string;
+    status?: number;
+    track?: string;
+    sellType?: string;
+    addBy?: number;
+    storeId?: number;
+    sourceType?: string;
+    uploadTickets?: Array<any>; // This can be refined with a more specific type if needed
+    popUpload?: Array<any>; // This can be refined with a more specific type if needed
+    tournamentName?: string;
+    city_name?: string;
+    country_name?: string;
+    tId?: number;
   }
   
   const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -48,8 +81,31 @@ export interface InventoryItem {
       notes: 'These are premium tickets with excellent views.',
       benefits: 'None',
       restrictions: 'None',
-      matchTime: '16:30',
-      matchLocation: 'Stamford Bridge, London, United Kingdom',
+
+      ticketTypeId: 4,
+      ticketCategoryId: 13,
+      homeTown: 'Home',
+      seat: 0,
+      priceType: 'USD',
+      shipDate: null,
+      price: 1,
+      priceGbp: 0.85,
+      webPrice: null,
+      listingNote: [{ id: 27, name: 'Not Seated Together' }],
+      split: { id: 2, name: 'All Together' },
+      sellDate: '2025-08-05',
+      status: 1,
+      track: '0',
+      sellType: 'buy',
+      addBy: 215,
+      storeId: 13,
+      sourceType: '1boxoffice',
+      uploadTickets: [{ id: 136, ticket_type: 4, additional_dynamic_content: '5678', qr_links: { android: ['5678'], ios: ['5678'] } }],
+      popUpload: [],
+      tournamentName: 'FIFA World Cup',
+      city_name: 'Los Angeles',
+      country_name: 'United States',
+      tId: 64,
     },
     {
       id: '2',
@@ -72,8 +128,37 @@ export interface InventoryItem {
       notes: 'Physical tickets will be shipped via courier.',
       benefits: 'Free Parking',
       restrictions: 'Age Limit',
-      matchTime: '15:00',
-      matchLocation: 'Old Trafford, Manchester, United Kingdom',
+
+      ticketTypeId: 3,
+      ticketCategoryId: 13,
+      homeTown: 'Home',
+      seat: 0,
+      priceType: 'USD',
+      shipDate: null,
+      price: 32,
+      priceGbp: 27.2,
+      webPrice: null,
+      listingNote: [
+        { id: 647, name: 'Adult + Junior' },
+        { id: 7, name: 'Concession Ticket - Child' },
+        { id: 82, name: 'Includes Parking' },
+        { id: 11, name: 'Includes VIP Pass' },
+        { id: 93, name: 'All Tickets Seated Together' },
+      ],
+      split: { id: 3, name: 'In Pairs' },
+      sellDate: '2025-08-05',
+      status: 1,
+      track: '0',
+      sellType: 'buy',
+      addBy: 215,
+      storeId: 13,
+      sourceType: '1boxoffice',
+      uploadTickets: [{ id: 159, ticket_type: 3, additional_dynamic_content: 'jkksjksdj', upload_tickets: '' }],
+      popUpload: [],
+      tournamentName: 'FIFA World Cup',
+      city_name: 'Los Angeles',
+      country_name: 'United States',
+      tId: 64,
     },
     {
       id: '3',
@@ -96,8 +181,31 @@ export interface InventoryItem {
       notes: 'Mobile transfer tickets, will be sent 24 hours before the match.',
       benefits: 'VIP Access',
       restrictions: 'No Re-entry',
-      matchTime: '21:00',
-      matchLocation: 'Santiago Bernabéu, Madrid, Spain',
+
+      ticketTypeId: 2,
+      ticketCategoryId: 10,
+      homeTown: 'Away',
+      seat: 0,
+      priceType: 'GBP',
+      shipDate: null,
+      price: 120,
+      priceGbp: 120,
+      webPrice: null,
+      listingNote: [],
+      split: { id: 1, name: 'None' },
+      sellDate: '2025-08-01',
+      status: 1,
+      track: '0',
+      sellType: 'buy',
+      addBy: 100,
+      storeId: 5,
+      sourceType: 'partner',
+      uploadTickets: [],
+      popUpload: [],
+      tournamentName: 'La Liga',
+      city_name: 'Madrid',
+      country_name: 'Spain',
+      tId: 20,
     }
   ];
   
