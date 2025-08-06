@@ -102,7 +102,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
           restrictions: 'None', // Default value
           row: ticket.row as InventoryItem['row'],
           sectionBlock: ticket.ticket_block as InventoryItem['sectionBlock'] || 'Block 1',
-          firstSeat: ticket.first_seat,
+          firstSeat: (ticket.first_seat === null || ticket.first_seat === '') ? '1' : ticket.first_seat as '1' | '2' | '3' | '4' | '5',
           lastSeat: ticket.seat ? ticket.seat.toString() : undefined,
           splitType: ticket.split.name as InventoryItem['splitType'],
           notes: ticket.listing_note ? ticket.listing_note.map((note: { name: any; }) => note.name).join(', ') : '',
@@ -359,45 +359,39 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
               style={{ backgroundColor: '#130562' }}
             >
               <div className="flex items-center flex-grow flex-wrap">
-                <div className="flex items-center space-x-2  border-r border-[#423283] flex-shrink-0 border-none">
-                  <div className=" px-4 py-3 sticky left-0  z-10 border-r border-[#423283]">
+                <div className="flex items-center space-x-2 border-r border-[#423283] flex-shrink-0 border-none">
+                  <div className="px-4 py-3 sticky left-0 z-10 border-r border-[#423283]">
                     <input type="radio" name="" id="" className="w-4 h-4" />
                   </div>
-                <div className="flex items-center flex-grow flex-wrap">
-                  <h6 className="text-sm flex gap-1 font-semibold custom-table-header-width">
-                    {matchName}
-                  </h6>
-                  <div className=" flex-wrap items-center text-sm ml-4 gap-2 hidden md:flex">
-                    <div className="flex items-center space-x-4 pr-8 h-10 border-r border-[#423283] border-none">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="20px"
-                        viewBox="0 -960 960 960"
-                        width="20px"
-                        fill="#fff"
-                      >
-                        <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
-                      </svg>
-                      <span>
-                        {matchInfo?.match_date || 'N/A'}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2 px-2 border-r h-10 border-[#423283] border-none pr-8">
-                      <svg
-                        className="h-5 w-5 text-white"
-                        fill="none"
-                        stroke="white"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                      </svg>
-                      <span>
+                  <div className="flex items-center flex-grow flex-wrap">
+                    <h6 className="text-sm flex gap-1 font-semibold custom-table-header-width">
+                      {matchName}
+                    </h6>
+                    <div className="flex-wrap items-center text-sm ml-4 gap-2 hidden md:flex">
+                      <div className="flex items-center space-x-4 pr-8 h-10 border-r border-[#423283] border-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#fff">
+                          <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+                        </svg>
+                        <span>
+                          {matchInfo?.match_date || 'N/A'}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2 px-2 border-r h-10 border-[#423283] border-none pr-8">
+                        <svg
+                          className="h-5 w-5 text-white"
+                          fill="none"
+                          stroke="white"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <span>
                         {matchInfo?.match_time || 'N/A'}
                       </span>
                     </div>
@@ -475,7 +469,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
                 {/* Column headers */}
                 {/* Static columns that always appear */}
-                {['Match Info', 'Ticket Type', 'Category', 'Quantity', 'Price'].map(title => (
+                {['Listing ID', 'Ticket Type', 'Quantity', 'Sold', 'Split Type', 'Seating Arrangement', 'Max Display Quantity', 'Category', 'Section/Block', 'Row', 'First Seat', 'Last Seat', 'Notes', 'Barcode', 'Serial Number', 'Ticket ID', 'Match ID'].map(title => (
                   <th
                     key={title}
                     className="px-4 py-2 text-left text-nowrap text-xs font-medium text-gray-500 uppercase border-r border-gray-200"
@@ -509,11 +503,13 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     </div>
                   </th>
                 ))}
+                <th className="px-4 py-2 text-left text-nowrap text-xs font-medium text-gray-500 uppercase border-r border-gray-200">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
               {matchFilteredInventory.map(item => (
-                // console.log(item,"")
                 <tr key={item.id} className="border-b border-gray-200">
                   <td className="px-4 py-2 sticky left-0 bg-white z-10 border-r border-gray-200 group-hover:bg-[#EFF1FD]">
                     <input
@@ -523,14 +519,11 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       onChange={() => handleCheckboxChange(item.id)}
                     />
                   </td>
-                  {/* Static data columns */}
                   <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
                     <input
                       type="text"
-                      value={item.matchEvent}
-                      onChange={e =>
-                        handleCellChange(item.id, 'matchEvent', e.target.value)
-                      }
+                      value={item.listingId}
+                      onChange={e => handleCellChange(item.id, 'listingId', e.target.value)}
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
@@ -538,20 +531,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     <input
                       type="text"
                       value={item.ticketType}
-                      onChange={e =>
-                        handleCellChange(item.id, 'ticketType', e.target.value)
-                      }
-                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:// ... existing code ...
-ring-blue-500"
-                    />
-                  </td>
-                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
-                    <input
-                      type="text"
-                      value={item.category}
-                      onChange={e =>
-                        handleCellChange(item.id, 'category', e.target.value)
-                      }
+                      onChange={e => handleCellChange(item.id, 'ticketType', e.target.value)}
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
@@ -559,31 +539,122 @@ ring-blue-500"
                     <input
                       type="number"
                       value={item.quantity}
-                      onChange={e =>
-                        handleCellChange(
-                          item.id,
-                          'quantity',
-                          parseInt(e.target.value),
-                        )
-                      }
+                      onChange={e => handleCellChange(item.id, 'quantity', parseInt(e.target.value))}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.ticketStatus}
+                      onChange={e => handleCellChange(item.id, 'ticketStatus', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.splitType}
+                      onChange={e => handleCellChange(item.id, 'splitType', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.seatingArrangement}
+                      onChange={e => handleCellChange(item.id, 'seatingArrangement', e.target.value)}
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
                   <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
                     <input
                       type="number"
-                      value={item.payoutPrice}
-                      onChange={e =>
-                        handleCellChange(
-                          item.id,
-                          'payoutPrice',
-                          parseFloat(e.target.value),
-                        )
-                      }
+                      value={item.maxDisplayQuantity}
+                      onChange={e => handleCellChange(item.id, 'maxDisplayQuantity', parseInt(e.target.value))}
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
-                  {/* Action buttons */}
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.category}
+                      onChange={e => handleCellChange(item.id, 'category', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.sectionBlock}
+                      onChange={e => handleCellChange(item.id, 'sectionBlock', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.row}
+                      onChange={e => handleCellChange(item.id, 'row', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.firstSeat}
+                      onChange={e => handleCellChange(item.id, 'firstSeat', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.lastSeat}
+                      onChange={e => handleCellChange(item.id, 'lastSeat', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.notes}
+                      onChange={e => handleCellChange(item.id, 'notes', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.barcode}
+                      onChange={e => handleCellChange(item.id, 'barcode', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.serialNumber}
+                      onChange={e => handleCellChange(item.id, 'serialNumber', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.ticketId}
+                      onChange={e => handleCellChange(item.id, 'ticketId', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900 border-r border-gray-200">
+                    <input
+                      type="text"
+                      value={item.matchId}
+                      onChange={e => handleCellChange(item.id, 'matchId', e.target.value)}
+                      className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </td>
                   <td className="px-4 py-2 text-sm text-gray-900 flex space-x-2">
                     <button
                       onClick={() => handleCloneItem(item.id)}
