@@ -503,7 +503,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     </div>
                   </th>
                 ))}
-                <th className="w-32 px-4 py-2 sticky right-0 top-0 z-20 bg-white border-l border-gray-300 text-xs font-medium text-gray-500 uppercase flex items-center justify-center space-x-1 border-gray-200">
+                <th className="w-42 px-4 py-2 sticky right-0 top-0 z-20 bg-white border-l border-gray-300 text-xs font-medium text-gray-500 uppercase flex items-center justify-end space-x-1 ">
                   <button
                     onClick={scrollLeft}
                     disabled={!canScrollLeft}
@@ -687,7 +687,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
-                  <td className="bg-white text-sm text-gray-900 flex space-x-2 w-32 px-4 py-5 sticky right-0">
+                  <td className="bg-white text-sm text-gray-900 flex space-x-2 w-42 px-4 py-5 sticky right-0">
                   <button
                       onClick={() => handleCloneItem(item)}
                       className={`${
@@ -713,6 +713,25 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       // onClick={() => handleEditItem(item)}
                       className="text-black hover:text-red-900"
                     >
+                      {/* <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="currentColor"
+                      >
+                        <path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+                      </svg> */}
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="green"><path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+                    </button>
+                    <div className="h-6 border-r-custom"></div>
+
+                    {/*  */}
+
+                    <button
+                      // onClick={() => handleEditItem(item)}
+                      className="text-black hover:text-red-900"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="24px"
@@ -722,6 +741,18 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       >
                         <path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
                       </svg>
+                    </button>
+                    <div className="h-6 border-r-custom"></div>
+  
+                    <button
+                      onClick={() => handleCloneItem(item)}
+                      className={`${
+                        clonedItemIds.includes(item.id)
+                          ? 'text-green-500'
+                          : 'text-black'
+                      } hover:text-blue-900`}
+                    >
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-120q-138 0-240.5-91.5T122-440h82q14 104 92.5 172T480-200q117 0 198.5-81.5T760-480q0-117-81.5-198.5T480-760q-69 0-129 32t-101 88h110v80H120v-240h80v94q51-64 124.5-99T480-840q75 0 140.5 28.5t114 77q48.5 48.5 77 114T840-480q0 75-28.5 140.5t-77 114q-48.5 48.5-114 77T480-120Zm112-192L440-464v-216h80v184l128 128-56 56Z"/></svg>
                     </button>
                   </td>
                 </tr>
