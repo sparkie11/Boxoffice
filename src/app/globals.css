@@ -35,7 +35,27 @@ body {
 }
 select, input, .relative > #dateToShip{
   border: 1px solid #c2bcbc;
+  padding:  1 !important;
 }
+#matchEvent{
+color:#4D5383;
+font-weight: 600;
+-webkit-appearance: none;
+}
+
+.vertical-line {
+  width: 1px; /* The thickness of the line */
+  height: 20px; /* The length of the line */
+  background-color: #DADBE5; /* The color of the line */
+}
+
+.vertical-line-div {
+  width: 1px; /* The thickness of the line */
+  height: 45px; /* The length of the line */
+  background-color: #DADBE5; /* The color of the line */
+}
+
+
 #matchEvent, #dateToShip, #dateToShip:focus{
   border: 1px solid transparent;
   outline: none;
@@ -64,7 +84,7 @@ select{
   width: 412px;
 }
 .border-none{
-  border-right: 1px solid var(--color-gray-400);
+  border-right: 1px solid #423283;
   
   }
 @media (max-width: 600px) { 

@@ -7,6 +7,7 @@ import Sidebar from '../components/Sidebar';
 import FormSection from '../components/FormSection';
 import TableSection from '../components/TableSection';
 import { InventoryItem } from '../lib/mockApi';
+import { FaPlus } from 'react-icons/fa';
 
 export default function Home() {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -72,9 +73,10 @@ export default function Home() {
             <button
               type="submit"
               form="inventory-form"
-              className="ml-3 inline-flex justify-center font-bold  py-2 px-4 border border-transparent shadow-sm text-sm  rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className=" mr-4 inline-flex justify-center items-center gap-1 font-bold  py-2 px-4 border border-transparent shadow-sm text-sm  rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             >
-             +  Add Listing
+             <FaPlus/>  
+                Add Listing
             </button>
           </div >
           <div className='p-6'>

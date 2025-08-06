@@ -1,9 +1,12 @@
-import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaSignOutAlt, FaArrowRight } from 'react-icons/fa';
 
 export const navItems = [
-  { icon: FaHome, text: 'Home', href: '#' },
+
+  
+  { icon: FaArrowRight, text: 'Right', href: '#' },
+  { icon: "MJ", text: 'Home', href: '#' },
   { icon: FaPlus, text: 'Add Inventory', href: '#' },
-  { icon: FaList, text: 'Inventory List', href: '/' },
+  { icon: FaList, text: 'Inventory List', href: '/inventory' },
   { icon: FaShoppingCart, text: 'Orders', href: '#' },
   { icon: FaChartLine, text: 'Analytics', href: '#' },
   { icon: FaTicketAlt, text: 'Events', href: '#' },

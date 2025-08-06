@@ -43,7 +43,7 @@ export interface InventoryItem {
       lastSeat: '4',
       faceValue: 90000,
       payoutPrice: 90000,
-      dateToShip: '2024-11-10',
+      dateToShip: 'Sun, 10 Nov 2024',
       ticketsInHand: true,
       notes: 'These are premium tickets with excellent views.',
       benefits: 'None',

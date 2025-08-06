@@ -12,15 +12,15 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="bg-white border-b-2 border-gray-200 shadow-sm p-4 flex justify-between items-center">
+      <header className="bg-white border-b-1 border-gray-200 shadow-sm p-4 flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-[#130562] text-xl font-semibold">
+          <h1 className="text-[#130562] text-2xl font-semibold">
             Add Inventory
           </h1>
         </div>
 
         <div className="hidden sm:flex gap-5">
-          <button className="border-2 border-blue-600 text-blue-600 font-bold px-4 py-2 h-10 rounded-md hover:bg-blue-600 hover:text-white">
+          <button className="border-1 border-blue-600 text-blue-600 text-sm font-semibold px-4 py-2 h-10 rounded-md hover:bg-blue-600 hover:text-white">
             Request Event
           </button>
           <button className="flex justify-center items-center p-2 rounded-full bg-[#00A3EE] ">

@@ -8,13 +8,22 @@ const Sidebar: React.FC = () => {
   const pathname = usePathname();
   return (
     <aside className="hidden sm:flex w-16 text-white flex-col items-center py-4 bg-custom-dark-blue" style={{backgroundColor:"#130562"}}>
-      <div className="pb-4 mb-4 w-full border-b border-gray-400 flex justify-center">
+      <div className="pb-4 mb-4 w-full border-b-1 border-gray-400 flex justify-center">
         <Image src="/logo-small.svg" height={100} width={100} alt="Logo" className="h-10 w-10" />
       </div>
       <nav className="flex flex-col space-y-6 flex-grow">
         {navItems.map((item, index) => (
-          <a key={index} href={item.href} className={`p-2 rounded-md ${pathname === item.href ? 'bg-[#00A3EE]' : 'hover:bg-[#33beff]'} ${item.text === 'Add Inventory' ? 'bg-custom-blue' : ''}`}>
-            <item.icon size={24} /> 
+          <a key={index} href={item.href} className={`p-2 rounded-md ${ item.icon=="MJ" ?  ` bg-[#3E2E7E]` :  ``  }  ${pathname === item.href ? 'bg-[#00A3EE]' : 'hover:bg-[#33beff]'} ${item.text === 'Add Inventory' ? 'bg-custom-blue' : ''}`}>
+            {
+              item.icon === "MJ" ? (
+                <div className=' bg-[#3E2E7E]  '>
+
+                <p className='font-bold text-xl'>MJ</p>
+                </div>
+              ) : (
+                <item.icon size={24} />
+              )
+            }
           </a>
         ))}
       </nav>
