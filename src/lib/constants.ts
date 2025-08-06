@@ -1,4 +1,4 @@
-import { FaHome, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaSignOutAlt, FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaPlus, FaList, FaShoppingCart, FaChartLine, FaTicketAlt, FaCog, FaSignOutAlt } from 'react-icons/fa';
 
 export const navItems = [
 

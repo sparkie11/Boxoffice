@@ -1,4 +1,5 @@
 
+
 export interface InventoryItem {
     id: string;
     ticketType: 'E-ticket' | 'Physical' | 'Local Delivery' | 'Flash Seats' | 'Mobile Transfer' | 'None' ;

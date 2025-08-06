@@ -1,10 +1,8 @@
 import React from 'react';
 
-interface FilterComponentProps {
-  // Define props here
-}
 
-const FilterComponent: React.FC<FilterComponentProps> = () => {
+
+const FilterComponent: React.FC = () => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md mb-4">
         <div className='w-100 '>

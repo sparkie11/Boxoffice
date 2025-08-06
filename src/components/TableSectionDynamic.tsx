@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { TicketHistoryResponse } from '../types/ticketHistoryTypes'
-import { InventoryItem, getInventoryItems, addInventoryItem, updateInventoryItem, deleteInventoryItem } from '../lib/mockApi';
+import { InventoryItem,deleteInventoryItem } from '../lib/mockApi';
 
 interface TableSectionProps {
   ticketHistoryData: TicketHistoryResponse

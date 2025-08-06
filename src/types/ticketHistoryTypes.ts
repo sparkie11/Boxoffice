@@ -11,6 +11,16 @@ export interface MatchInfo {
   country_name: string;
 }
 
+export interface ListingNote {
+  id: number;
+  name: string;
+}
+
+export interface Split {
+  id: number;
+  name: string;
+}
+
 export interface Ticket {
   s_no: number;
   match_id: number;
@@ -31,8 +41,8 @@ export interface Ticket {
   price: number;
   price_gbp: number;
   web_price: number;
-  listing_note: any[]; // You might want to define a more specific type for listing_note
-  split: any; // You might want to define a more specific type for split
+  listing_note: ListingNote[];
+  split: Split;
 }
 
 export interface TicketHistoryDataItem {
