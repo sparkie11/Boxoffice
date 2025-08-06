@@ -35,7 +35,7 @@ body {
 }
 select, input, .relative > #dateToShip{
   border: 1px solid #c2bcbc;
-  padding:  1 !important;
+  /* padding:  1 !important; */
 }
 #matchEvent{
 color:#4D5383;
