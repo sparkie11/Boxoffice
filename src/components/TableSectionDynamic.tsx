@@ -353,9 +353,9 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
 
         return (
           <React.Fragment key={matchName}>
-          <section key={matchName} className="bg-white mt-1 mb-20 rounded-lg shadow-md">
+          <section key={matchName} className= "p-6 bg-white mt-1 mb-20 rounded-lg shadow-md">
             <div
-              className="flex justify-between items-center text-white"
+              className="flex justify-between items-center text-white "
               style={{ backgroundColor: '#130562' }}
             >
               <div className="flex items-center flex-grow flex-wrap">
@@ -449,7 +449,7 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
       {isTableVisible[matchName] && (
         <div
           ref={tableContainerRef}
-          className="overflow-x-auto border border-gray-200 hide-scrollbar overflow-y-hidden rounded-md"
+          className="overflow-x-auto  border border-gray-200 hide-scrollbar overflow-y-hidden rounded-md"
         >
           <table className="min-w-[1920px] table-fixed   divide-y divide-gray-200">
             <thead>
@@ -503,8 +503,40 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                     </div>
                   </th>
                 ))}
-                <th className="px-4 py-2 text-left text-nowrap text-xs font-medium text-gray-500 uppercase border-r border-gray-200">
-                  Actions
+                <th className="w-32 px-4 py-2 sticky right-0 top-0 z-20 bg-white border-l border-gray-300 text-xs font-medium text-gray-500 uppercase flex items-center justify-center space-x-1 border-gray-200">
+                  <button
+                    onClick={scrollLeft}
+                    disabled={!canScrollLeft}
+                    className="p-1 rounded-full hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {/* Left chevron */}
+                    <svg
+                      fill="#130562"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 1024 1024"
+                      width="24px"
+                      height="24px"
+                    >
+                      <path d="M689 165.1 308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z" />
+                    </svg>
+                  </button>
+                  <div className="" />
+                  <button
+                    onClick={scrollRight}
+                    disabled={!canScrollRight}
+                    className="p-1 rounded-full hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {/* Right chevron */}
+                    <svg
+                      fill="#130562"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 1024 1024"
+                      width="24px"
+                      height="24px"
+                    >
+                      <path d="M715.8 493.5 335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.6 0-37z" />
+                    </svg>
+                  </button>
                 </th>
               </tr>
             </thead>
@@ -655,18 +687,41 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
                       className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </td>
-                  <td className="px-4 py-2 text-sm text-gray-900 flex space-x-2">
-                    <button
-                      onClick={() => handleCloneItem(item.id)}
-                      className="text-blue-600 hover:text-blue-800"
+                  <td className="bg-white text-sm text-gray-900 flex space-x-2 w-32 px-4 py-5 sticky right-0">
+                  <button
+                      onClick={() => handleCloneItem(item)}
+                      className={`${
+                        clonedItemIds.includes(item.id)
+                          ? 'text-green-500'
+                          : 'text-black'
+                      } hover:text-blue-900`}
                     >
-                      Clone
+                      <svg
+                        fill="currentColor"
+                        strokeWidth="0"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        height="20px"
+                        width="20px"
+                        style={{ overflow: 'visible', color: 'currentcolor' }}
+                      >
+                        <path d="M256 0c-25.3 0-47.2 14.7-57.6 36-7-2.6-14.5-4-22.4-4-35.3 0-64 28.7-64 64v165.5l-2.7-2.7c-25-25-65.5-25-90.5 0s-25 65.5 0 90.5l87.7 87.7c48 48 113.1 75 181 75H304c1.5 0 3-.1 4.5-.4 91.7-6.2 165-79.4 171.1-171.1.3-1.5.4-3 .4-4.5V160c0-35.3-28.7-64-64-64-5.5 0-10.9.7-16 2v-2c0-35.3-28.7-64-64-64-7.9 0-15.4 1.4-22.4 4C303.2 14.7 281.3 0 256 0zm-16 96.1V64c0-8.8 7.2-16 16-16s16 7.2 16 16v168c0 13.3 10.7 24 24 24s24-10.7 24-24V95.9c0-8.8 7.2-16 16-16s16 7.2 16 16v136c0 13.3 10.7 24 24 24s24-10.7 24-24V160c0-8.8 7.2-16 16-16s16 7.2 16 16v172.9c-.1.6-.1 1.3-.2 1.9-3.4 69.7-59.3 125.6-129 129-.6 0-1.3.1-1.9.2h-13.4c-55.2 0-108.1-21.9-147.1-60.9l-87.7-87.8c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l43.7 43.7c6.9 6.9 17.2 8.9 26.2 5.2s14.8-12.5 14.8-22.2V96c0-8.8 7.2-16 16-16s16 7.1 16 15.9V232c0 13.3 10.7 24 24 24s24-10.7 24-24V96.1z"></path>
+                      </svg>
                     </button>
+                    <div className="h-6 border-r-custom"></div>
                     <button
-                      onClick={() => handleDeleteItem(item.id)}
-                      className="text-red-600 hover:text-red-800"
+                      // onClick={() => handleEditItem(item)}
+                      className="text-black hover:text-red-900"
                     >
-                      Delete
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="currentColor"
+                      >
+                        <path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" />
+                      </svg>
                     </button>
                   </td>
                 </tr>

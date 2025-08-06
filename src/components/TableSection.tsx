@@ -711,6 +711,7 @@ const TableSection: React.FC<TableSectionProps> = ({
 
                   {/* ✅ Sticky actions column */}
                   <td className={`w-32 px-4 py-5 sticky right-0 ${selectedItems.includes(item.id) ? 'bg-[#D9E1FF]' : 'bg-white'} z-20 text-sm border-l botrder-gray-300 flex items-center justify-center space-x-3 border-r border-gray-200 group-hover:bg-[#EFF1FD]`}>
+                   
                     <button
                       onClick={() => handleClone(item)}
                       className={`${

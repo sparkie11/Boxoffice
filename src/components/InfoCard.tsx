@@ -10,23 +10,20 @@ interface InfoCardProps {
 
 const InfoCard: React.FC<InfoCardProps> = ({ title, value ,tickets , checkbox }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 flex flex-col items-center justify-center">
-      <div>
+    <div className="bg-white rounded-lg border-1 border-gray-200 p-4 flex flex-col ">
+      <div className=' flex justify-between'>
       <h3 className="text-lg font-semibold text-gray-700">{title}</h3>
-      <div>
+      <div className=' flex   '>
         {tickets != 0 && (
-          <input
-            type="checkbox"
-            className="mt-2"
-            checked={tickets > 0}
-            readOnly
-          />
+          <div className='p-1 text-xs font-bold bg-gray-200 p-'>
+<p> {tickets } tickets </p>
+
+          </div>
         )}
       </div>
       </div>
-      <div>
-      <p className="text-3xl font-bold text-indigo-600 mt-2">{value}</p>
-      <div>
+      <div className='flex justify-between'>
+      <p className="text-3xl w-75 font-bold  mt-2">{value}</p>
       {checkbox && (
           <input
             type="checkbox"
@@ -35,6 +32,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ title, value ,tickets , checkbox })
             readOnly
           />
         )}
+      <div>
       </div>
 
       </div>

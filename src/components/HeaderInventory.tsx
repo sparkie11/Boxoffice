@@ -19,7 +19,7 @@ const HeaderInventory: React.FC<HeaderInventoryProps> = ({ matchName }) => {
       <header className="bg-white border-b-1 border-gray-200 shadow-sm p-4 flex justify-between items-center">
         <div className="flex items-center">
           <h1 className="text-[#130562] text-3xl mt-1 ml-3 font-semibold">
-             {matchName || 'Inventory'}
+             { 'Inventory'}
           </h1>
         </div>
 
