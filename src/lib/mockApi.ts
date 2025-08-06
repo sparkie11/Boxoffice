@@ -46,6 +46,7 @@ export interface InventoryItem {
     status?: number;
     track?: string;
     sellType?: string;
+    matchTime?: string;
     addBy?: number;
     storeId?: number;
     sourceType?: string;
