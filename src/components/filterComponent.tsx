@@ -48,7 +48,7 @@ const FilterComponent: React.FC = () => {
           >Team members</label>
           <select id="teamMembers" name="teamMembers" 
           // className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm appearance-none"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
 
           >
             <option>1 selected</option>
@@ -73,7 +73,7 @@ const FilterComponent: React.FC = () => {
           >Event Date</label>
           <input type="text" name="eventDate" id="eventDate" 
           // className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
 
            placeholder="29/11/2014" />
           {/* <button className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
@@ -96,7 +96,7 @@ const FilterComponent: React.FC = () => {
            >Ticket type</label>
           <select id="ticketType" name="ticketType"
           //  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm appearance-none"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
 
            >
             <option>None</option>
@@ -120,7 +120,7 @@ const FilterComponent: React.FC = () => {
           >Ticket Status</label>
           <select id="ticketStatus" name="ticketStatus"
           //  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm appearance-none"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
 
            >
             <option>None</option>
@@ -145,7 +145,7 @@ const FilterComponent: React.FC = () => {
           >Listing Status</label>
           <select id="listingStatus" name="listingStatus"
           //  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm appearance-none"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
            
            >
             <option>None</option>
@@ -170,7 +170,7 @@ const FilterComponent: React.FC = () => {
           >Category</label>
           <select id="category" name="category" 
           // className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm appearance-none"
-          className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           
           >
             <option>None</option>

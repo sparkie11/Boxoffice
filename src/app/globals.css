@@ -43,6 +43,11 @@ font-weight: 600;
 -webkit-appearance: none;
 }
 
+.spacing-y{
+padding-top: 0.75rem;
+padding-bottom: 0.75rem;
+}
+
 .vertical-line {
   width: 1px; /* The thickness of the line */
   height: 20px; /* The length of the line */

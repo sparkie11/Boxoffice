@@ -71,6 +71,7 @@ export default function Inventory() {
         }
 
         const data: TicketHistoryResponse = await response.json();
+        console.log('Fetched ticket history data:', data);
         setTicketHistoryData(data);
       } catch (error) {
         console.error("Failed to fetch ticket history:", error);

@@ -345,7 +345,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="ticketType"
                 value={formData.ticketType}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>None</option>
 
@@ -374,7 +374,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="quantity"
                 value={formData.quantity}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md py-3 px-3 focus:outline-none focus:ring-blue-500 focus:focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full border border-gray-300 rounded-md spacing-y px-3 focus:outline-none focus:ring-blue-500 focus:focus:border-blue-500 sm:text-sm"
               />
               {errors.quantity && (
                 <p className="text-red-500 text-xs mt-1">{errors.quantity}</p>
@@ -394,7 +394,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="splitType"
                 value={formData.splitType}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>None</option>
                 <option>Even</option>
@@ -417,7 +417,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="seatingArrangement"
                 value={formData.seatingArrangement}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>Not Seated Together</option>
                 <option>Seated Together</option>
@@ -445,7 +445,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="maxDisplayQuantity"
                 value={formData.maxDisplayQuantity}
                 onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md py-3 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                className="mt-1 block w-full border border-gray-300 rounded-md spacing-y px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
             {/* </div> */}
@@ -465,7 +465,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="fanArea"
                 value={formData.fanArea} // Bind value to state
                 onChange={handleChange} // Add onChange handler
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>Home</option>
                 <option>Away</option>
@@ -486,7 +486,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>Away Fans Section</option>
                 <option>Home Fans Section</option>
@@ -512,7 +512,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="sectionBlock"
                 value={formData.sectionBlock}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>Longside Lower Tier</option>
                 <option>Shortside Lower Tier</option>
@@ -542,7 +542,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="row"
                 value={formData.row}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>5</option>
                 <option>A</option>
@@ -570,7 +570,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="firstSeat"
                 value={formData.firstSeat}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>3</option>
                 <option>1</option>
@@ -606,7 +606,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                   name="faceValue"
                   value={formData.faceValue}
                   onChange={handleChange}
-                  className="block w-full input-padding-left pr-12 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="block w-full input-padding-left pr-12 spacing-y border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="0.00"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -639,7 +639,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                   name="payoutPrice"
                   value={formData.payoutPrice}
                   onChange={handleChange}
-                  className="block w-full input-padding-left pr-12 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="block w-full input-padding-left pr-12 spacing-y border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                   placeholder="0.00"
                 />
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -661,7 +661,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="benefits"
                 value={formData.benefits || "None"}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>None</option>
                 <option>Free Parking</option>
@@ -684,7 +684,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                 name="restrictions"
                 value={formData.restrictions || "None"}
                 onChange={handleChange}
-                className="mt-1 block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                className="mt-1 block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
               >
                 <option>None</option>
                 <option>Age Limit</option>
@@ -709,7 +709,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing }) => {
                   name="dateToShip"
                   value={formData.dateToShip}
                   onChange={handleChange}
-                  className="block w-full pl-3 pr-3 py-3 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="block w-full pl-3 pr-3 spacing-y text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 />
               </div>
             </div>
