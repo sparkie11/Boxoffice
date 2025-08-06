@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { TicketHistoryResponse } from '../types/ticketHistoryTypes'
-import { InventoryItem,deleteInventoryItem } from '../lib/mockApi';
+import { InventoryItem } from '../lib/mockApi';
 
 interface TableSectionProps {
   ticketHistoryData: TicketHistoryResponse
@@ -269,42 +269,42 @@ const TableSectionDynamic: React.FC<TableSectionProps> = ({ ticketHistoryData })
     )
   }
 
-  // Get unique options for filter dropdowns
-  const getUniqueOptions = (columnName: string): string[] => {
-    const key = columnKeyMap[columnName] as keyof InventoryItem
-    if (!key) return []
+  // // Get unique options for filter dropdowns
+  // const getUniqueOptions = (columnName: string): string[] => {
+  //   const key = columnKeyMap[columnName] as keyof InventoryItem
+  //   if (!key) return []
     
-    const options = new Set<string>()
-    inventory.forEach(item => {
-      const value = item[key]
-      if (value !== undefined && value !== null) {
-        options.add(String(value))
-      }
-    })
+  //   const options = new Set<string>()
+  //   inventory.forEach(item => {
+  //     const value = item[key]
+  //     if (value !== undefined && value !== null) {
+  //       options.add(String(value))
+  //     }
+  //   })
     
-    return Array.from(options)
-  }
+  //   return Array.from(options)
+  // }
 
   // Handle filter change
-  const handleFilterChange = (columnName: string, option: string) => {
-    const key = columnKeyMap[columnName] as keyof InventoryItem
-    if (!key) return
+  // const handleFilterChange = (columnName: string, option: string) => {
+  //   const key = columnKeyMap[columnName] as keyof InventoryItem
+  //   if (!key) return
     
-    setFilters(prev => {
-      const newFilters = { ...prev }
-      if (!newFilters[key]) {
-        newFilters[key] = new Set<string>()
-      }
+  //   setFilters(prev => {
+  //     const newFilters = { ...prev }
+  //     if (!newFilters[key]) {
+  //       newFilters[key] = new Set<string>()
+  //     }
       
-      if (newFilters[key].has(option)) {
-        newFilters[key].delete(option)
-      } else {
-        newFilters[key].add(option)
-      }
+  //     if (newFilters[key].has(option)) {
+  //       newFilters[key].delete(option)
+  //     } else {
+  //       newFilters[key].add(option)
+  //     }
       
-      return newFilters
-    })
-  }
+  //     return newFilters
+  //   })
+  // }
 
   // Apply filters to inventory
   useEffect(() => {

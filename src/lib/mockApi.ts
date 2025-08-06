@@ -49,13 +49,26 @@ export interface InventoryItem {
     addBy?: number;
     storeId?: number;
     sourceType?: string;
-    uploadTickets?: Array<{ id: number; ticket_type: number; additional_dynamic_content?: string; qr_links?: { android: string[]; ios: string[] }; upload_tickets?: string }>;
-    popUpload?: Array<{ id: number; ticket_type: number; additional_dynamic_content?: string; qr_links?: { android: string[]; ios: string[] }; upload_tickets?: string }>;
+    uploadTickets?: UploadTicket[];
+    popUpload?: UploadTicket[];
     tournamentName?: string;
     city_name?: string;
     country_name?: string;
     tId?: number;
-  }
+}
+
+export interface QrLinks {
+    android: string[];
+    ios: string[];
+}
+
+export interface UploadTicket {
+    id: number;
+    ticket_type: number;
+    additional_dynamic_content?: string;
+    qr_links?: QrLinks;
+    upload_tickets?: string;
+}
   
   const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
   
@@ -208,14 +221,20 @@ export interface InventoryItem {
       ticketId: 'TKT003',
       matchId: 'MCH003',
       barcode: 'BC003',
+      uploadTickets: [],
+      popUpload: [],
+      tournamentName: 'Champions League',
+      city_name: 'Madrid',
+      country_name: 'Spain',
+      tId: 2,
 
-      ticketTypeId: 2,
-      ticketCategoryId: 10,
-      homeTown: 'Away',
+      ticketTypeId: 6,
+      ticketCategoryId: 15,
+      homeTown: 'Neutral',
       seat: 0,
-      priceType: 'GBP',
+      priceType: 'EUR',
       shipDate: null,
-      price: 120,
+      price: 3,
       priceGbp: 120,
       webPrice: null,
       listingNote: [],
